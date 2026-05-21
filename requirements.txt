@@ -1,0 +1,4 @@
+torch>=2.4
+transformers>=4.45
+numpy>=1.26
+matplotlib>=3.8

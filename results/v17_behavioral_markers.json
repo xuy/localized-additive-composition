@@ -1,0 +1,988 @@
+{
+  "model_name": "google/gemma-2-2b-it",
+  "inject_layer": 14,
+  "n_gen_tokens": 80,
+  "personas": [
+    "engineer",
+    "counselor",
+    "founder",
+    "teacher",
+    "journalist",
+    "doctor",
+    "lawyer",
+    "chef"
+  ],
+  "tasks": [
+    "arch",
+    "plan",
+    "proposal"
+  ],
+  "persona_markers": {
+    "engineer": [
+      "SPOF",
+      "single point of failure",
+      "single-point-of-failure",
+      "scalability",
+      "scalable",
+      "reliability",
+      "fault tolerance",
+      "fault-tolerant",
+      "redundancy",
+      "resilience",
+      "throughput",
+      "latency",
+      "consistency",
+      "availability"
+    ],
+    "counselor": [
+      "feel heard",
+      "validate",
+      "validated",
+      "acknowledge",
+      "acknowledged",
+      "your experience",
+      "your feelings",
+      "compassion",
+      "compassionate",
+      "without judgment",
+      "trauma-informed",
+      "active listening",
+      "feelings",
+      "emotion"
+    ],
+    "founder": [
+      "iterate",
+      "iterating",
+      "iteration",
+      "MVP",
+      "minimum viable",
+      "user feedback",
+      "customer feedback",
+      "capital-efficient",
+      "lean",
+      "runway",
+      "validation",
+      "ship",
+      "shipping",
+      "product-market fit",
+      "vanity metric",
+      "traction",
+      "burn",
+      "bootstrapped"
+    ],
+    "teacher": [
+      "imagine",
+      "think of",
+      "like a",
+      "analogy",
+      "analogies",
+      "for example",
+      "step by step",
+      "step-by-step",
+      "students",
+      "understand",
+      "let's say",
+      "picture this",
+      "as if"
+    ],
+    "journalist": [
+      "sources",
+      "source",
+      "primary source",
+      "primary sources",
+      "follow the money",
+      "accountability",
+      "transparency",
+      "investigate",
+      "verify",
+      "verified",
+      "on the record",
+      "off the record",
+      "evidence",
+      "public interest",
+      "pointed question",
+      "track record"
+    ],
+    "doctor": [
+      "symptom",
+      "symptoms",
+      "diagnosis",
+      "diagnose",
+      "differential",
+      "patient",
+      "treatment",
+      "ruling out",
+      "rule out",
+      "clinical",
+      "examination",
+      "condition",
+      "medication",
+      "evaluate",
+      "underlying",
+      "comorbid"
+    ],
+    "lawyer": [
+      "liability",
+      "liabilities",
+      "jurisdiction",
+      "statute",
+      "precedent",
+      "evidence",
+      "evidentiary",
+      "opposing",
+      "counterparty",
+      "due diligence",
+      "parties",
+      "indemnif",
+      "contractual",
+      "compliance",
+      "compliant",
+      "jurisprudence",
+      "case theory",
+      "on the record"
+    ],
+    "chef": [
+      "seasonal",
+      "season",
+      "ingredient",
+      "ingredients",
+      "flavor",
+      "flavour",
+      "palate",
+      "fresh",
+      "simmer",
+      "saut\u00e9",
+      "saute",
+      "balance",
+      "garnish",
+      "mise en place",
+      "technique",
+      "classical",
+      "French"
+    ]
+  },
+  "results": {
+    "engineer__arch": {
+      "clean": {
+        "any": true,
+        "count": 3,
+        "hits": [
+          "SPOF",
+          "single point of failure",
+          "scalability"
+        ],
+        "text": "## Review of Microservice Architecture with Single PostgreSQL Database\n\nThis design presents a common microservice architecture pattern, but with a potential single point of failure (SPOF) in the shared PostgreSQL database. \n\n**Pros:**\n\n* **Scalability:** Microservices offer independent scaling, allowing individual services to handle increased load.\n* **Flexibility:**  Services can be developed and deployed independently, promoting agility"
+      },
+      "additive": {
+        "any": true,
+        "count": 3,
+        "hits": [
+          "SPOF",
+          "single point of failure",
+          "scalability"
+        ],
+        "text": "## Review of Microservice Architecture with Single PostgreSQL Database\n\nThis design presents a common microservice architecture pattern, but with a potential single point of failure (SPOF) in the shared PostgreSQL database. \n\n**Pros:**\n\n* **Scalability:** Microservices offer independent scaling, allowing individual services to handle increased load.\n* **Flexibility:**  Services can be developed and deployed independently, promoting agility"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "SPOF",
+          "single point of failure"
+        ],
+        "text": "## Review of Microservice Architecture with Single PostgreSQL Database\n\nThis design presents a common microservice architecture pattern, but with a potential single point of failure (SPOF) in the shared PostgreSQL database. \n\n**Strengths:**\n\n* **Microservice Architecture:**  This approach promotes modularity, independent scaling, and fault isolation. Each service can be developed, deployed, and scaled independently, leading to increased"
+      },
+      "bare": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "scalability",
+          "scalable"
+        ],
+        "text": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design is a common approach to building scalable and maintainable applications. Let's break down the pros, cons, and potential improvements:\n\n**Pros:**\n\n* **Scalability:** Each service can be scaled independently, allowing for horizontal scaling of individual components.\n* **Modularity:** Services are self-contained, making them easier to develop"
+      }
+    },
+    "engineer__plan": {
+      "clean": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "reliability"
+        ],
+        "text": "This plan sounds ambitious, but it's crucial to be realistic about the constraints of a three-person team and the lack of usage analytics in the initial launch. Here's a review focusing on architecture, reliability, and avoiding single points of failure:\n\n**Strengths:**\n\n* **Focus on Architecture:**  A three-person team can benefit from a strong architectural focus. This can lead to"
+      },
+      "additive": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "scalability",
+          "reliability"
+        ],
+        "text": "Let's break down this plan and discuss potential challenges and considerations for a three-person team launching a B2B SaaS product in three months, with no usage analytics in v1.\n\n**Strengths:**\n\n* **Focus on Architecture:**  Prioritizing architecture from the start is crucial for scalability and reliability. This is a good sign.\n* **Reliability Emphasis:**  Avoiding single points of"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "scalability",
+          "reliability"
+        ],
+        "text": "## Review of B2B SaaS Product Launch Plan (3 Months, No Usage Analytics)\n\nThis plan presents a good starting point for a B2B SaaS product launch, but requires careful consideration and refinement to ensure success. \n\n**Strengths:**\n\n* **Focus on Architecture:**  Prioritizing architecture from the outset is crucial for scalability and reliability. \n* **Short Timeline:**  A"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of your B2B SaaS Product Launch Plan (3-Month Timeline)\n\n**Strengths:**\n\n* **Short Timeline:**  Three months is a manageable timeframe for a B2B SaaS product launch, especially with a focus on core features and minimal initial analytics.\n* **Small Team:**  A three-person team allows for focused execution and efficient decision-making.\n* **"
+      }
+    },
+    "engineer__proposal": {
+      "clean": {
+        "any": true,
+        "count": 3,
+        "hits": [
+          "SPOF",
+          "single-point-of-failure",
+          "reliability"
+        ],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\nThis proposal for an internal calendar scheduling tool using an LLM is interesting and has potential, but requires careful consideration of architectural, reliability, and single-point-of-failure (SPOF) aspects. \n\n**Strengths:**\n\n* **Automation:** Automating calendar scheduling can significantly improve efficiency and reduce manual effort.\n* **LL"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\nThis proposal for an internal calendar scheduling tool using an LLM is interesting and potentially valuable. However, as a senior software engineer with 10 years of experience, I have some concerns and suggestions for improvement:\n\n**Strengths:**\n\n* **Automation:** Automating calendar scheduling can significantly reduce manual effort and improve efficiency.\n* **LL"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "reliability"
+        ],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\nThis proposal for an internal calendar scheduling tool using an LLM is interesting and has potential, but requires careful consideration of its architecture, reliability, and potential single points of failure. \n\n**Strengths:**\n\n* **Automation:** Automating calendar scheduling can significantly improve efficiency and reduce manual effort.\n* **LLM Integration:** Leveraging an"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\n**Overall Impression:** This proposal presents a promising idea for an internal tool that could significantly improve meeting scheduling efficiency. Leveraging an LLM for tentative meeting scheduling has the potential to streamline the process and reduce manual effort.\n\n**Strengths:**\n\n* **Automation:** Automating the scheduling process eliminates manual tasks, freeing up time for other priorities."
+      }
+    },
+    "counselor__arch": {
+      "clean": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "trauma-informed",
+          "active listening"
+        ],
+        "text": "This microservice architecture sounds promising, but let's dive into the potential benefits and challenges, considering your expertise in empathy, active listening, and trauma-informed care:\n\n**Potential Benefits:**\n\n* **Scalability and Flexibility:** Microservices allow for independent scaling of individual services, enabling you to handle increased traffic or specific workload demands without impacting the entire system. This is crucial for a client-"
+      },
+      "additive": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "trauma-informed",
+          "active listening"
+        ],
+        "text": "This microservice architecture design sounds promising, but let's dive into the potential benefits and challenges, considering your expertise in empathy, active listening, and trauma-informed care:\n\n**Potential Benefits:**\n\n* **Scalability and Flexibility:** Microservices allow for independent scaling of individual services, enabling you to handle increased traffic or specific workload demands without impacting the entire system. This is crucial for a client"
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This microservice architecture design sounds promising, but let's dive into the potential benefits and challenges, considering the specific expertise of an empathetic counselor:\n\n**Potential Benefits:**\n\n* **Scalability and Flexibility:** Microservices allow for independent scaling of individual services, enabling you to handle increased traffic or specific workload demands without impacting the entire system. This is particularly valuable for applications with fluctuating user loads.\n"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design is a common approach to building scalable and maintainable applications. Let's break down the pros, cons, and potential improvements:\n\n**Pros:**\n\n* **Scalability:** Each service can be scaled independently, allowing for horizontal scaling of individual components.\n* **Modularity:** Services are self-contained, making them easier to develop"
+      }
+    },
+    "counselor__plan": {
+      "clean": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "active listening"
+        ],
+        "text": "This is an exciting project! Launching a B2B SaaS product in three months with no usage analytics is ambitious, but definitely achievable with a strong team and a clear plan. \n\nHere's a review of your plan, focusing on the aspects you've mentioned:\n\n**Strengths:**\n\n* **Empathy and Active Listening:**  This is crucial for building trust and rapport with your team"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This is an exciting project, but it's also a high-pressure situation with a tight timeline.  Let's break down the plan and explore some potential areas of concern and opportunities for growth.\n\n**Strengths:**\n\n* **Ambitious Goal:** Launching a B2B SaaS product in three months is a bold move, demonstrating a strong commitment to market entry.\n* **Team Dynamics"
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This is an exciting project, but it's also a high-pressure one!  Here's a breakdown of the plan and some considerations for an empathetic counselor:\n\n**Strengths:**\n\n* **Clear Timeline:**  Having a three-month launch window is ambitious but achievable with a focused team.\n* **Team Collaboration:**  A three-person team allows for a strong sense of shared"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of your B2B SaaS Product Launch Plan (3-Month Timeline)\n\n**Strengths:**\n\n* **Short Timeline:**  Three months is a manageable timeframe for a B2B SaaS product launch, especially with a focus on core features and minimal initial analytics.\n* **Small Team:**  A three-person team allows for focused execution and efficient decision-making.\n* **"
+      }
+    },
+    "counselor__proposal": {
+      "clean": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "trauma-informed",
+          "active listening"
+        ],
+        "text": "This is a great idea with a lot of potential!  Here's a review from an empathetic counselor's perspective, incorporating the principles of active listening, cognitive behavioral therapy, and trauma-informed care:\n\n**Strengths:**\n\n* **Addresses a real need:**  Many people struggle with scheduling meetings, especially with busy schedules and multiple stakeholders. This tool could significantly improve efficiency and reduce stress."
+      },
+      "additive": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "trauma-informed",
+          "active listening"
+        ],
+        "text": "This is a great idea with a lot of potential!  Here's a review from an empathetic counselor's perspective, incorporating the principles of active listening, cognitive behavioral therapy, and trauma-informed care:\n\n**Strengths:**\n\n* **Addresses a real need:**  Many people struggle with scheduling meetings, especially with busy schedules and multiple stakeholders. This tool could significantly improve efficiency and reduce stress."
+      },
+      "remove_X": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "trauma-informed",
+          "active listening"
+        ],
+        "text": "This is a great idea with a lot of potential!  Here's a review from an empathetic counselor's perspective, incorporating the principles of active listening, cognitive behavioral therapy, and trauma-informed care:\n\n**Strengths:**\n\n* **Addresses a real need:**  Many people struggle with scheduling meetings, especially with busy schedules and multiple stakeholders. This tool could significantly improve efficiency and reduce stress."
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\n**Overall Impression:** This proposal presents a promising idea for an internal tool that could significantly improve meeting scheduling efficiency. Leveraging an LLM for tentative meeting scheduling has the potential to streamline the process and reduce manual effort.\n\n**Strengths:**\n\n* **Automation:** Automating the scheduling process eliminates manual tasks, freeing up time for other priorities."
+      }
+    },
+    "founder__arch": {
+      "clean": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "iteration"
+        ],
+        "text": "##  Microservice Architecture Review: Single PostgreSQL Database\n\nThis design sounds promising, but let's break it down and consider the pragmatic aspects:\n\n**Pros:**\n\n* **Scalability:** Microservices allow for independent scaling of individual services, potentially improving performance and resource utilization.\n* **Flexibility:**  Each service can be developed and deployed independently, fostering agility and faster iteration cycles.\n*"
+      },
+      "additive": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "iteration"
+        ],
+        "text": "##  Microservice Architecture Review: Single PostgreSQL Database\n\nThis design sounds promising, but let's break it down with a pragmatic startup founder's lens:\n\n**Pros:**\n\n* **Scalability:** Microservices allow for independent scaling of individual services, potentially improving performance and reducing resource consumption.\n* **Flexibility:**  Each service can be developed and deployed independently, allowing for faster iteration and"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "iteration"
+        ],
+        "text": "##  Microservice Architecture Review: \n\nThis design sounds promising, but let's break it down and consider some pragmatic aspects:\n\n**Pros:**\n\n* **Scalability:** Microservices allow for independent scaling of individual services, potentially improving performance and resource utilization.\n* **Flexibility:**  Each service can be developed and deployed independently, allowing for faster iteration and experimentation.\n* **Fault"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design is a common approach to building scalable and maintainable applications. Let's break down the pros, cons, and potential improvements:\n\n**Pros:**\n\n* **Scalability:** Each service can be scaled independently, allowing for horizontal scaling of individual components.\n* **Modularity:** Services are self-contained, making them easier to develop"
+      }
+    },
+    "founder__plan": {
+      "clean": {
+        "any": true,
+        "count": 3,
+        "hits": [
+          "iterating",
+          "capital-efficient",
+          "bootstrapped"
+        ],
+        "text": "This plan sounds ambitious and potentially risky, but it's not impossible to pull off. Here's a breakdown of the plan, its potential pitfalls, and some pragmatic considerations:\n\n**Strengths:**\n\n* **Bootstrapped Experience:** You have a proven track record of making capital-efficient decisions and iterating quickly. This is a huge advantage in a fast-paced startup environment.\n*"
+      },
+      "additive": {
+        "any": true,
+        "count": 3,
+        "hits": [
+          "iterating",
+          "capital-efficient",
+          "bootstrapped"
+        ],
+        "text": "This plan sounds ambitious, but it's important to be realistic about the challenges and potential pitfalls. Here's a breakdown of the plan, focusing on the pragmatic aspects:\n\n**Strengths:**\n\n* **Bootstrapped Experience:** You have a proven track record of making capital-efficient decisions and iterating quickly. This is invaluable for a startup, especially in the early stages.\n* **"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 3,
+        "hits": [
+          "iteration",
+          "user feedback",
+          "bootstrapped"
+        ],
+        "text": "This plan sounds ambitious and potentially risky, but it's not impossible to pull off. Here's a breakdown of the plan, its strengths, weaknesses, and some pragmatic considerations:\n\n**Strengths:**\n\n* **Fast Iteration:**  Focusing on user feedback and rapid iteration is crucial for a B2B SaaS product, especially in the early stages.  \n* **Bootstrapped Experience:**"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of your B2B SaaS Product Launch Plan (3-Month Timeline)\n\n**Strengths:**\n\n* **Short Timeline:**  Three months is a manageable timeframe for a B2B SaaS product launch, especially with a focus on core features and minimal initial analytics.\n* **Small Team:**  A three-person team allows for focused execution and efficient decision-making.\n* **"
+      }
+    },
+    "founder__proposal": {
+      "clean": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\nThis proposal for an internal calendar scheduling tool using an LLM sounds promising, but needs a critical review from a pragmatic startup founder's perspective. \n\n**Here's a breakdown of the pros and cons:**\n\n**Pros:**\n\n* **Automation:** Automating scheduling saves time and reduces manual effort, which is valuable for any startup"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\nThis proposal for an internal calendar scheduling tool using an LLM sounds promising, but needs some critical evaluation from a pragmatic startup founder's perspective. \n\n**Here's a breakdown:**\n\n**Pros:**\n\n* **Capital Efficiency:**  Building an LLM-powered tool could be a cost-effective solution compared to hiring a dedicated"
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\nThis proposal for an internal calendar scheduling tool using an LLM sounds promising, but needs some critical evaluation from a pragmatic startup founder's perspective. \n\n**Here's a breakdown of the pros and cons:**\n\n**Pros:**\n\n* **Capital Efficiency:**  Building an LLM-powered tool could be a cost-effective solution"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\n**Overall Impression:** This proposal presents a promising idea for an internal tool that could significantly improve meeting scheduling efficiency. Leveraging an LLM for tentative meeting scheduling has the potential to streamline the process and reduce manual effort.\n\n**Strengths:**\n\n* **Automation:** Automating the scheduling process eliminates manual tasks, freeing up time for other priorities."
+      }
+    },
+    "teacher__arch": {
+      "clean": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "imagine",
+          "like a"
+        ],
+        "text": "Alright class, imagine our school is like a big, bustling city.  We have different departments, like the cafeteria, the library, and the gym.  Each department has its own important job, right?\n\nNow, imagine each department has its own little computer system, like a mini-city within the city.  These mini-cities are our microservices.  Each one is responsible for"
+      },
+      "additive": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "imagine"
+        ],
+        "text": "Alright class, let's talk about this cool thing called microservices. Imagine you're building a giant Lego castle. You wouldn't just build it all in one big pile, right? You'd break it down into smaller, manageable sections: the walls, the towers, the drawbridge. \n\nNow, microservices are like those smaller Lego sections. They're little pieces"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "imagine",
+          "like a"
+        ],
+        "text": "Okay, class, let's talk about this cool thing called microservices. Imagine you're building a giant Lego castle. You wouldn't just build it all in one big pile, right? You'd break it down into smaller, manageable sections: the walls, the towers, the drawbridge. \n\nNow, imagine each section is a **microservice**, like a little Lego"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design is a common approach to building scalable and maintainable applications. Let's break down the pros, cons, and potential improvements:\n\n**Pros:**\n\n* **Scalability:** Each service can be scaled independently, allowing for horizontal scaling of individual components.\n* **Modularity:** Services are self-contained, making them easier to develop"
+      }
+    },
+    "teacher__plan": {
+      "clean": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "think of",
+          "like a"
+        ],
+        "text": "Okay, let's break this down like we're building a rocket ship! \ud83d\ude80\n\n**The Mission:** We're building a new software product, like a super-powered tool for businesses.  Think of it like a fancy app that helps companies do things faster and better. \n\n**The Team:** We're a team of three, like a crew on a space mission."
+      },
+      "additive": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "imagine"
+        ],
+        "text": "Okay, let's break this down.  Imagine you're building a new lemonade stand.  \n\n**The Team:**\n\n* **You:** You're the **science teacher**, the one who knows how to explain things clearly and make them fun. You're the one who's going to figure out how to make the lemonade stand work.\n* **Team Member 1"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "imagine"
+        ],
+        "text": "Okay, here's a breakdown of your plan, with a focus on making it relatable for middle schoolers:\n\n**The Challenge:**\n\nImagine you're building a super cool new game for your friends. You've got the idea, the characters, the rules, but you don't have any way to see if anyone actually likes it. That's kind of like your product"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of your B2B SaaS Product Launch Plan (3-Month Timeline)\n\n**Strengths:**\n\n* **Short Timeline:**  Three months is a manageable timeframe for a B2B SaaS product launch, especially with a focus on core features and minimal initial analytics.\n* **Small Team:**  A three-person team allows for focused execution and efficient decision-making.\n* **"
+      }
+    },
+    "teacher__proposal": {
+      "clean": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "imagine"
+        ],
+        "text": "Okay, so you're thinking about using a fancy AI tool to help us schedule meetings, right?  That's a pretty cool idea!  Imagine it like this:\n\n**The Problem:**  Right now, we spend a lot of time trying to find a time that works for everyone when we need to schedule a meeting.  It's like trying to find a puzzle piece that"
+      },
+      "additive": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "imagine"
+        ],
+        "text": "##  Proposal Review: Automated Calendar Scheduling with an LLM\n\nThis is a really interesting idea!  It sounds like you're looking to streamline the scheduling process for meetings, which is something we all struggle with at some point.  \n\n**Here's my take on it, broken down into digestible chunks:**\n\n**The Good:**\n\n* **Time-saving:**  Imagine a world"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "imagine",
+          "like a"
+        ],
+        "text": "This sounds like a really cool idea!  It's like having a super-smart assistant that helps us manage our busy schedules.  Here's how I'd explain it to my middle schoolers:\n\n**Imagine this:** You're trying to plan a big science fair project with your friends. You need to find a time that works for everyone, right?  \n\n**That"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\n**Overall Impression:** This proposal presents a promising idea for an internal tool that could significantly improve meeting scheduling efficiency. Leveraging an LLM for tentative meeting scheduling has the potential to streamline the process and reduce manual effort.\n\n**Strengths:**\n\n* **Automation:** Automating the scheduling process eliminates manual tasks, freeing up time for other priorities."
+      }
+    },
+    "journalist__arch": {
+      "clean": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "pointed question"
+        ],
+        "text": "Okay, let's dissect this microservice architecture design.  Two decades in city government have taught me that even the simplest systems can be riddled with hidden complexities.  \n\n**Here are my pointed questions, focusing on potential pitfalls and areas for deeper investigation:**\n\n**1. Transactional State and Event Log: A Risky Combination**\n\n* **Why PostgreSQL?**  PostgreSQL is"
+      },
+      "additive": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "pointed question"
+        ],
+        "text": "Okay, let's dissect this microservice architecture design.  Two decades in city government have taught me that even the simplest design can have hidden complexities.  \n\n**Here are my pointed questions and observations:**\n\n**1.  Transactionality and Event Logging: A Double-Edged Sword**\n\n* **The Promise:**  Sharing a single database for both transactional state and event logs sounds efficient"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "pointed question"
+        ],
+        "text": "##  Microservice Architecture: A Critical Review\n\nThis design sounds promising, but as a seasoned investigative journalist, I'd want to dig deeper. Here are some pointed questions and areas of concern:\n\n**1. Data Integrity and Security:**\n\n* **Single Point of Failure:**  Sharing a single database for both transactional state and event logs creates a single point of failure. What happens if one"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design is a common approach to building scalable and maintainable applications. Let's break down the pros, cons, and potential improvements:\n\n**Pros:**\n\n* **Scalability:** Each service can be scaled independently, allowing for horizontal scaling of individual components.\n* **Modularity:** Services are self-contained, making them easier to develop"
+      }
+    },
+    "journalist__plan": {
+      "clean": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "Okay, let's break down this plan and see if it holds up under the scrutiny of a seasoned investigative journalist. \n\n**Here are my initial questions and concerns:**\n\n**1. The \"Three-Month Launch\" Timeline:**\n\n* **How realistic is this timeline?**  Three months is a very aggressive timeframe for a B2B SaaS product, especially one without usage analytics."
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "Okay, let's break this down. A three-person team launching a B2B SaaS product in three months with no usage analytics in the initial version is a recipe for potential disaster.  Here's a breakdown of my concerns and questions, focusing on the \"money\" aspect:\n\n**The Red Flags:**\n\n* **Unrealistic Timeline:** Three months is an incredibly tight timeframe for"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "pointed question"
+        ],
+        "text": "This plan sounds like a recipe for disaster, especially with a three-month launch window and no usage analytics in the initial version. Here's a breakdown of my concerns and pointed questions:\n\n**Concerns:**\n\n* **Unrealistic Timeline:** Three months is an incredibly short time to build a B2B SaaS product, especially one with no usage analytics. This implies a lack of thorough planning and"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of your B2B SaaS Product Launch Plan (3-Month Timeline)\n\n**Strengths:**\n\n* **Short Timeline:**  Three months is a manageable timeframe for a B2B SaaS product launch, especially with a focus on core features and minimal initial analytics.\n* **Small Team:**  A three-person team allows for focused execution and efficient decision-making.\n* **"
+      }
+    },
+    "journalist__proposal": {
+      "clean": {
+        "any": true,
+        "count": 3,
+        "hits": [
+          "accountability",
+          "transparency",
+          "pointed question"
+        ],
+        "text": "##  Proposal: Automated Calendar Scheduling Tool Using LLM\n\n**As an investigative journalist with two decades of experience, I'm intrigued by the potential of this tool. However, I have some serious concerns that need to be addressed before I can wholeheartedly endorse it.**\n\n**Here are my pointed questions:**\n\n**1.  Transparency and Accountability:**\n\n* **Who will be responsible for the L"
+      },
+      "additive": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "accountability",
+          "transparency"
+        ],
+        "text": "##  Proposal: Automated Calendar Scheduling Tool Using LLM\n\n**As an investigative journalist with two decades of experience, I'm intrigued by the potential of this tool. However, I have some serious concerns that need to be addressed before I can wholeheartedly endorse it.**\n\n**Here are my questions:**\n\n**1.  Transparency and Accountability:**\n\n* **Who is responsible for the LLM'"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "pointed question"
+        ],
+        "text": "##  Proposal: Automated Calendar Scheduling Tool Using LLM\n\nThis proposal sounds promising, but as a seasoned investigative journalist, I have some pointed questions and concerns:\n\n**1.  What is the \"LLM\" and how does it work?**\n\n* **Specificity:**  The proposal needs to clearly define the specific LLM being used. Is it a proprietary system, a publicly available model"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\n**Overall Impression:** This proposal presents a promising idea for an internal tool that could significantly improve meeting scheduling efficiency. Leveraging an LLM for tentative meeting scheduling has the potential to streamline the process and reduce manual effort.\n\n**Strengths:**\n\n* **Automation:** Automating the scheduling process eliminates manual tasks, freeing up time for other priorities."
+      }
+    },
+    "doctor__arch": {
+      "clean": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "patient"
+        ],
+        "text": "This design sounds promising, but let's break it down and consider some potential pros and cons, especially from a primary-care physician's perspective:\n\n**Pros:**\n\n* **Scalability:** Microservices are inherently scalable. You can add or remove services as needed, potentially improving performance and handling increased patient load.\n* **Flexibility:**  Each service can be developed and updated independently,"
+      },
+      "additive": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "patient"
+        ],
+        "text": "This design sounds promising, but let's break it down and consider some potential pros and cons:\n\n**Pros:**\n\n* **Scalability:** Microservices offer excellent scalability. You can scale individual services independently based on demand, ensuring optimal performance even with high patient volume.\n* **Flexibility:**  Microservices allow for independent development and deployment, enabling you to update or replace individual services without affecting"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "patient"
+        ],
+        "text": "This design sounds promising for a primary care application, but let's break it down and consider some potential pros and cons:\n\n**Pros:**\n\n* **Scalability:** Microservices offer excellent scalability. You can scale individual services independently based on demand, ensuring optimal performance even with high patient volume.\n* **Flexibility:**  Each service can be developed and updated independently, allowing for faster innovation and"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design is a common approach to building scalable and maintainable applications. Let's break down the pros, cons, and potential improvements:\n\n**Pros:**\n\n* **Scalability:** Each service can be scaled independently, allowing for horizontal scaling of individual components.\n* **Modularity:** Services are self-contained, making them easier to develop"
+      }
+    },
+    "doctor__plan": {
+      "clean": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This is an interesting and ambitious plan!  Here's a breakdown of the plan and some considerations from a primary-care physician's perspective:\n\n**The Plan:**\n\n* **Three-person team:** This is a good starting point for a lean, agile development process. \n* **B2B SaaS product:** This is a common and potentially lucrative market. \n* **"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This is a fascinating and ambitious project!  Here's a breakdown of the plan, focusing on the aspects relevant to a primary-care physician's perspective:\n\n**Strengths:**\n\n* **Clear Focus:**  A B2B SaaS product targeting a specific market segment is a good starting point.  This allows for focused development and marketing efforts.\n* **Short Timeline:**  Three months"
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This is a fascinating and ambitious project!  Here's a breakdown of the plan, considering the unique challenges of a B2B SaaS product launch with no usage analytics in the initial phase:\n\n**Strengths:**\n\n* **Clear Focus:**  A three-person team is a lean and agile structure, ideal for rapid development and iteration.\n* **Timeframe:**  Three months is a"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of your B2B SaaS Product Launch Plan (3-Month Timeline)\n\n**Strengths:**\n\n* **Short Timeline:**  Three months is a manageable timeframe for a B2B SaaS product launch, especially with a focus on core features and minimal initial analytics.\n* **Small Team:**  A three-person team allows for focused execution and efficient decision-making.\n* **"
+      }
+    },
+    "doctor__proposal": {
+      "clean": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "patient"
+        ],
+        "text": "This is a very interesting proposal!  Here's a breakdown of the potential benefits and considerations for an LLM-powered internal tool for scheduling in a primary care practice:\n\n**Potential Benefits:**\n\n* **Increased Efficiency:**  Automating scheduling could significantly reduce administrative burden, freeing up your time for patient care. \n* **Improved Patient Experience:**  Faster scheduling, fewer missed appointments,"
+      },
+      "additive": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "patient"
+        ],
+        "text": "This is a very interesting proposal!  Here's a breakdown of the potential benefits and considerations for an LLM-powered internal tool for scheduling in a primary care practice:\n\n**Potential Benefits:**\n\n* **Increased Efficiency:**  Automating scheduling can save significant time for both the physician and staff. This frees up time for more patient interaction and potentially reduces administrative burden.\n* **Improved Patient"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "patient"
+        ],
+        "text": "This is a very interesting proposal!  Here's a breakdown of the potential benefits and drawbacks, along with some considerations for a primary care physician like yourself:\n\n**Potential Benefits:**\n\n* **Increased Efficiency:**  Automating scheduling could save significant time, allowing you to focus more on patient care and less on administrative tasks. \n* **Reduced Errors:**  LLMs can help minimize scheduling"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\n**Overall Impression:** This proposal presents a promising idea for an internal tool that could significantly improve meeting scheduling efficiency. Leveraging an LLM for tentative meeting scheduling has the potential to streamline the process and reduce manual effort.\n\n**Strengths:**\n\n* **Automation:** Automating the scheduling process eliminates manual tasks, freeing up time for other priorities."
+      }
+    },
+    "lawyer__arch": {
+      "clean": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This microservice architecture design has some potential, but it needs careful consideration and potential adjustments to ensure it's robust and scalable for a corporate litigation environment. \n\nHere's a breakdown of the design, potential issues, and suggestions for improvement:\n\n**Strengths:**\n\n* **Scalability:** Microservices allow for independent scaling of individual services, potentially improving performance and resource utilization.\n* **"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Microservice Architecture Review: Strengths, Weaknesses, and Considerations\n\nThis design presents a solid foundation for a microservice architecture, but requires careful consideration to ensure its effectiveness and scalability. \n\n**Strengths:**\n\n* **Modularity:**  Breaking down the application into eight independent services promotes modularity, allowing for easier development, testing, and deployment.\n* **Scalability:** Each service can"
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This microservice architecture design has some potential, but it needs careful consideration and potential adjustments to ensure it's robust and scalable for a corporate litigation environment. \n\nHere's a breakdown of the design, potential issues, and suggestions for improvement:\n\n**Strengths:**\n\n* **Scalability:** Microservices allow for independent scaling of individual services, potentially improving performance and resource utilization.\n* **"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design is a common approach to building scalable and maintainable applications. Let's break down the pros, cons, and potential improvements:\n\n**Pros:**\n\n* **Scalability:** Each service can be scaled independently, allowing for horizontal scaling of individual components.\n* **Modularity:** Services are self-contained, making them easier to develop"
+      }
+    },
+    "lawyer__plan": {
+      "clean": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This is a high-risk, high-reward scenario.  Here's a breakdown of the plan's potential pitfalls and how a corporate litigator might approach it:\n\n**Potential Pitfalls:**\n\n* **Lack of Data:**  Without usage analytics, the team is operating blind. This makes it difficult to:\n    * **Validate assumptions:**  Can the product truly solve the problem"
+      },
+      "additive": {
+        "any": true,
+        "count": 1,
+        "hits": [
+          "contractual"
+        ],
+        "text": "This plan is ambitious, even for a seasoned litigator!  Here's a breakdown of the potential legal and business challenges, and how a corporate litigator might approach this situation:\n\n**Potential Legal Challenges:**\n\n* **Contractual Disputes:**  The lack of usage analytics in v1 raises concerns about potential contractual breaches.  \n    * **Argument:**  The lack of usage data could"
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This is a high-risk, high-reward scenario.  Here's a breakdown of the plan's strengths and weaknesses, along with potential legal and business considerations:\n\n**Strengths:**\n\n* **Ambitious Timeline:**  Launching in three months is ambitious, but achievable with a laser focus and strong execution.\n* **Team Size:** Three people can be a lean but effective team,"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of your B2B SaaS Product Launch Plan (3-Month Timeline)\n\n**Strengths:**\n\n* **Short Timeline:**  Three months is a manageable timeframe for a B2B SaaS product launch, especially with a focus on core features and minimal initial analytics.\n* **Small Team:**  A three-person team allows for focused execution and efficient decision-making.\n* **"
+      }
+    },
+    "lawyer__proposal": {
+      "clean": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Tool for Calendar Scheduling with LLM\n\nThis proposal for an internal tool that automates calendar scheduling using an LLM has potential, but requires careful consideration and refinement. \n\n**Strengths:**\n\n* **Efficiency:** Automating calendar scheduling can significantly reduce administrative burden and time spent on scheduling, freeing up valuable time for lawyers to focus on legal work.\n* **Consistency:**"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Tool for Calendar Scheduling\n\nThis proposal for an internal tool that automates calendar scheduling using an LLM is intriguing and potentially valuable. However, as a seasoned corporate litigator, I see both opportunities and potential pitfalls. \n\n**Strengths:**\n\n* **Efficiency:** Automating calendar scheduling can significantly reduce administrative burden, freeing up time for lawyers to focus on more strategic tasks."
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This proposal for an internal tool that automates calendar scheduling using an LLM has some interesting potential, but it needs careful consideration before implementation. Here's a breakdown of the pros and cons, along with some suggestions for improvement:\n\n**Pros:**\n\n* **Efficiency:** Automating calendar scheduling can save significant time and effort, especially for busy litigators who juggle multiple cases and deadlines.\n"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\n**Overall Impression:** This proposal presents a promising idea for an internal tool that could significantly improve meeting scheduling efficiency. Leveraging an LLM for tentative meeting scheduling has the potential to streamline the process and reduce manual effort.\n\n**Strengths:**\n\n* **Automation:** Automating the scheduling process eliminates manual tasks, freeing up time for other priorities."
+      }
+    },
+    "chef__arch": {
+      "clean": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "classical",
+          "French"
+        ],
+        "text": "This microservice architecture design has some potential, but it needs careful consideration, especially given your experience in classical French cuisine and Michelin-starred kitchens. \n\n**Here's a breakdown of the pros and cons:**\n\n**Pros:**\n\n* **Scalability:** Microservices allow you to scale individual services independently, which can be beneficial for handling peak demand or specific functionalities.\n* **Modularity"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This microservice architecture design has some potential, but it needs careful consideration, especially given your experience in high-end kitchens. Here's a breakdown of the pros, cons, and considerations:\n\n**Pros:**\n\n* **Scalability:** Microservices allow you to scale individual services independently, potentially improving performance and reducing resource consumption.\n* **Modularity:**  Breaking down the application into smaller"
+      },
+      "remove_X": {
+        "any": true,
+        "count": 2,
+        "hits": [
+          "classical",
+          "French"
+        ],
+        "text": "This microservice architecture design has some potential, but it needs careful consideration, especially given your experience in classical French cuisine and Michelin-starred kitchens. \n\n**Here's a breakdown of the pros and cons:**\n\n**Pros:**\n\n* **Scalability:** Microservices allow you to scale individual services independently, potentially improving performance and reducing resource consumption.\n* **Modularity:**  Breaking down"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design is a common approach to building scalable and maintainable applications. Let's break down the pros, cons, and potential improvements:\n\n**Pros:**\n\n* **Scalability:** Each service can be scaled independently, allowing for horizontal scaling of individual components.\n* **Modularity:** Services are self-contained, making them easier to develop"
+      }
+    },
+    "chef__plan": {
+      "clean": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This plan sounds ambitious and exciting, but it needs a lot of refinement, especially considering the lack of usage analytics in the initial version. Here's a breakdown of the plan and some key considerations:\n\n**Strengths:**\n\n* **Strong Team:** Three people with diverse skills (chef, product, marketing) is a great foundation.\n* **Focus on Seasonality:**  This is a smart"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This plan sounds ambitious, but let's break it down and see if it's feasible for a three-person team with a tight launch timeline. \n\n**Strengths:**\n\n* **Strong Leadership:** Your experience as a head chef in Michelin-starred kitchens speaks volumes about your ability to lead, manage, and execute under pressure. This is crucial for a fast-paced B2B SaaS"
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This plan has the makings of a solid foundation, but it needs some seasoning to be truly ready for launch. Here's a breakdown of the plan and some key considerations for a head chef turned SaaS entrepreneur:\n\n**Strengths:**\n\n* **Experience:** Your background in Michelin-starred kitchens is invaluable. You understand the importance of quality, precision, and consistency, which are crucial for a successful"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Review of your B2B SaaS Product Launch Plan (3-Month Timeline)\n\n**Strengths:**\n\n* **Short Timeline:**  Three months is a manageable timeframe for a B2B SaaS product launch, especially with a focus on core features and minimal initial analytics.\n* **Small Team:**  A three-person team allows for focused execution and efficient decision-making.\n* **"
+      }
+    },
+    "chef__proposal": {
+      "clean": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This proposal for an internal tool that automates calendar scheduling using an LLM is a **solid idea with potential, but needs some refinement**. \n\n**Here's a breakdown of the pros and cons:**\n\n**Pros:**\n\n* **Efficiency:**  Automating calendar scheduling can save significant time for busy chefs like yourself.  \n* **Consistency:**  An LLM can help ensure meetings"
+      },
+      "additive": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This proposal for an internal tool that automates calendar scheduling using an LLM is a **solid idea with potential, but needs some refinement**. \n\n**Here's a breakdown of the pros and cons:**\n\n**Pros:**\n\n* **Efficiency:**  Automating calendar scheduling can save significant time for busy chefs like yourself.  \n* **Consistency:**  An LLM can help ensure meetings"
+      },
+      "remove_X": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "This proposal for an internal tool that automates calendar scheduling using an LLM is a **solid idea with potential, but needs some refinement**. \n\n**Here's a breakdown of the pros and cons:**\n\n**Pros:**\n\n* **Efficiency:**  Automating calendar scheduling can save significant time for busy chefs, allowing them to focus on other tasks.\n* **Consistency:**  An L"
+      },
+      "bare": {
+        "any": false,
+        "count": 0,
+        "hits": [],
+        "text": "## Proposal Review: Internal Calendar Scheduling Tool with LLM\n\n**Overall Impression:** This proposal presents a promising idea for an internal tool that could significantly improve meeting scheduling efficiency. Leveraging an LLM for tentative meeting scheduling has the potential to streamline the process and reduce manual effort.\n\n**Strengths:**\n\n* **Automation:** Automating the scheduling process eliminates manual tasks, freeing up time for other priorities."
+      }
+    }
+  },
+  "summary": {
+    "clean": {
+      "any_present_rate": 0.6666666666666666,
+      "any_present_count": 16,
+      "total_cells": 24,
+      "distinct_mean": 1.2083333333333333
+    },
+    "additive": {
+      "any_present_rate": 0.5833333333333334,
+      "any_present_count": 14,
+      "total_cells": 24,
+      "distinct_mean": 0.9166666666666666
+    },
+    "remove_X": {
+      "any_present_rate": 0.625,
+      "any_present_count": 15,
+      "total_cells": 24,
+      "distinct_mean": 0.9583333333333334
+    },
+    "bare": {
+      "any_present_rate": 0.041666666666666664,
+      "any_present_count": 1,
+      "total_cells": 24,
+      "distinct_mean": 0.08333333333333333
+    }
+  },
+  "per_persona": {
+    "engineer": {
+      "clean": 3,
+      "additive": 2,
+      "remove_X": 3,
+      "bare": 1
+    },
+    "counselor": {
+      "clean": 3,
+      "additive": 2,
+      "remove_X": 1,
+      "bare": 0
+    },
+    "founder": {
+      "clean": 2,
+      "additive": 2,
+      "remove_X": 2,
+      "bare": 0
+    },
+    "teacher": {
+      "clean": 3,
+      "additive": 3,
+      "remove_X": 3,
+      "bare": 0
+    },
+    "journalist": {
+      "clean": 2,
+      "additive": 2,
+      "remove_X": 3,
+      "bare": 0
+    },
+    "doctor": {
+      "clean": 2,
+      "additive": 2,
+      "remove_X": 2,
+      "bare": 0
+    },
+    "lawyer": {
+      "clean": 0,
+      "additive": 1,
+      "remove_X": 0,
+      "bare": 0
+    },
+    "chef": {
+      "clean": 1,
+      "additive": 0,
+      "remove_X": 1,
+      "bare": 0
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "host_baseline_median": 3.0454517144244164,
+  "results": {
+    "14": {
+      "kls": {
+        "engineer__arch": 0.7885491977212951,
+        "engineer__plan": 2.0397573756054044,
+        "engineer__proposal": 0.7876931913197041,
+        "counselor__arch": 1.8106054788222536,
+        "counselor__plan": 5.111724961472305,
+        "counselor__proposal": 1.2995138381811557,
+        "founder__arch": 5.239556077867746,
+        "founder__plan": 3.8940963707864285,
+        "founder__proposal": 2.3998282863758504,
+        "teacher__arch": 30.444410614669323,
+        "teacher__plan": 13.439313655525439,
+        "teacher__proposal": 16.53288529079873,
+        "journalist__arch": 4.1727795295819305,
+        "journalist__plan": 4.155529118444974,
+        "journalist__proposal": 12.787836030125618,
+        "doctor__arch": 4.2803203136054435,
+        "doctor__plan": 7.9352744817733765,
+        "doctor__proposal": 3.001501612365246,
+        "lawyer__arch": 1.688250762410462,
+        "lawyer__plan": 1.6833612894115504,
+        "lawyer__proposal": 2.687739767599851,
+        "chef__arch": 2.578889078111388,
+        "chef__plan": 1.8778753858059645,
+        "chef__proposal": 0.5469768118127831
+      },
+      "median": 2.8446206899825484,
+      "iqr": [
+        1.7800167997193057,
+        5.143682740571165
+      ],
+      "max": 30.444410614669323
+    },
+    "10_12_14": {
+      "kls": {
+        "engineer__arch": 0.7815497879637405,
+        "engineer__plan": 1.9909272231161594,
+        "engineer__proposal": 0.7798149520531297,
+        "counselor__arch": 1.6607129028998315,
+        "counselor__plan": 4.957229063977479,
+        "counselor__proposal": 1.2843998623284278,
+        "founder__arch": 5.092791356146336,
+        "founder__plan": 3.7573670484125614,
+        "founder__proposal": 2.3658728864975274,
+        "teacher__arch": 30.29746340587735,
+        "teacher__plan": 12.603873657690656,
+        "teacher__proposal": 15.939441842027009,
+        "journalist__arch": 4.087698533616276,
+        "journalist__plan": 3.9435778830738855,
+        "journalist__proposal": 12.39765490591526,
+        "doctor__arch": 3.999478052061022,
+        "doctor__plan": 7.895556416362524,
+        "doctor__proposal": 2.8854298051446676,
+        "lawyer__arch": 1.6555394334718585,
+        "lawyer__plan": 1.6735465303063393,
+        "lawyer__proposal": 2.737307058647275,
+        "chef__arch": 2.5385886201402172,
+        "chef__plan": 1.843802310526371,
+        "chef__proposal": 0.5585219834902091
+      },
+      "median": 2.8113684318959713,
+      "iqr": [
+        1.6703381234547123,
+        4.991119637019693
+      ],
+      "max": 30.29746340587735
+    },
+    "10_12_14_16_18": {
+      "kls": {
+        "engineer__arch": 0.6350611559464596,
+        "engineer__plan": 1.7519945143721998,
+        "engineer__proposal": 0.6580830360762775,
+        "counselor__arch": 1.4517882009968162,
+        "counselor__plan": 4.618151291861977,
+        "counselor__proposal": 1.3260241553361993,
+        "founder__arch": 4.2690882831811905,
+        "founder__plan": 3.8571514189243317,
+        "founder__proposal": 1.9227554704993963,
+        "teacher__arch": 25.700812991708517,
+        "teacher__plan": 10.485839842963742,
+        "teacher__proposal": 12.731344816740602,
+        "journalist__arch": 2.950183546357948,
+        "journalist__plan": 3.4297098788647418,
+        "journalist__proposal": 11.364802233874798,
+        "doctor__arch": 4.087414350668041,
+        "doctor__plan": 7.827712994068861,
+        "doctor__proposal": 3.213909987360239,
+        "lawyer__arch": 1.7147659352049232,
+        "lawyer__plan": 1.8070983708894346,
+        "lawyer__proposal": 2.6914097131229937,
+        "chef__arch": 2.6273009493015707,
+        "chef__plan": 1.9523793794214725,
+        "chef__proposal": 0.5515200327790808
+      },
+      "median": 2.820796629740471,
+      "iqr": [
+        1.7426873695803806,
+        4.356354035351387
+      ],
+      "max": 25.700812991708517
+    },
+    "10_12_14_16_18_20_22": {
+      "kls": {
+        "engineer__arch": 0.740108281490393,
+        "engineer__plan": 1.8788630543276668,
+        "engineer__proposal": 0.6810186225920916,
+        "counselor__arch": 1.4774989146972075,
+        "counselor__plan": 4.72769172570213,
+        "counselor__proposal": 1.254906459202175,
+        "founder__arch": 4.194648116827011,
+        "founder__plan": 3.8332649618387222,
+        "founder__proposal": 1.8476211884990335,
+        "teacher__arch": 25.040289293974638,
+        "teacher__plan": 10.631158938494991,
+        "teacher__proposal": 10.449630031595007,
+        "journalist__arch": 3.2477852934589464,
+        "journalist__plan": 3.5597996066571795,
+        "journalist__proposal": 11.461124323308468,
+        "doctor__arch": 4.131512411933727,
+        "doctor__plan": 7.9134254194796085,
+        "doctor__proposal": 3.1702363518998027,
+        "lawyer__arch": 1.7450944590382278,
+        "lawyer__plan": 1.8778140322538093,
+        "lawyer__proposal": 2.721074035624042,
+        "chef__arch": 2.913794635562226,
+        "chef__plan": 2.1809936687350273,
+        "chef__proposal": 0.6522823063132819
+      },
+      "median": 3.0420154937310144,
+      "iqr": [
+        1.821989506133832,
+        4.327909019045791
+      ],
+      "max": 25.040289293974638
+    },
+    "6_8_10_12_14_16_18_20_22": {
+      "kls": {
+        "engineer__arch": 0.7363472759898286,
+        "engineer__plan": 1.8241552761755884,
+        "engineer__proposal": 0.6899213315919042,
+        "counselor__arch": 1.45143594709225,
+        "counselor__plan": 4.682539347944044,
+        "counselor__proposal": 1.2360463814402465,
+        "founder__arch": 4.135999653488398,
+        "founder__plan": 3.7870791852474213,
+        "founder__proposal": 1.8600736218504608,
+        "teacher__arch": 25.00472766160965,
+        "teacher__plan": 10.545660097984637,
+        "teacher__proposal": 10.31294588278979,
+        "journalist__arch": 3.2432914442342735,
+        "journalist__plan": 3.552185821590683,
+        "journalist__proposal": 11.438557803630829,
+        "doctor__arch": 4.073490639941156,
+        "doctor__plan": 7.855936646461487,
+        "doctor__proposal": 3.1670769611373544,
+        "lawyer__arch": 1.680881750304252,
+        "lawyer__plan": 1.8484409907832742,
+        "lawyer__proposal": 2.7410897940862924,
+        "chef__arch": 2.84578879061155,
+        "chef__plan": 2.1548382099717855,
+        "chef__proposal": 0.650791037172894
+      },
+      "median": 3.0064328758744523,
+      "iqr": [
+        1.7883368947077543,
+        4.272634577102309
+      ],
+      "max": 25.00472766160965
+    }
+  },
+  "qual": {
+    "long": "## Review of Microservice Architecture with Single PostgreSQL Database\n\nThis design presents a common microservice architecture pattern, but with a potential single point of failure (SPOF) in the shared PostgreSQL database. \n\n**Pros:**\n\n* **Scalability:** Microservices offer independent scaling, allowing individual services to handle increased load.\n* **Flexibility:**  Services can be developed and deployed independently, promoting agility",
+    "host": "This microservice architecture design has some potential benefits and drawbacks that need careful consideration. \n\n**Potential Benefits:**\n\n* **Scalability:**  Each service can be scaled independently based on its workload, potentially leading to improved performance and reduced costs.\n* **Flexibility:**  Microservices allow for independent development, deployment, and updates, fostering agility and faster innovation.\n* **Fault Tolerance:**  ",
+    "multi_inject": "## Review of Microservice Architecture with Shared PostgreSQL\n\nThis design presents a common approach to microservice architecture, but it's crucial to analyze its strengths and weaknesses to determine its suitability for your specific needs.\n\n**Strengths:**\n\n* **Simplicity:**  Sharing a single database for both transactional state and event logs simplifies data management and reduces complexity.\n* **Scalability:**  Scaling individual services can"
+  }
+}

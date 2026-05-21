@@ -1,0 +1,178 @@
+{
+  "results": {
+    "engineer__arch": {
+      "kl_host_clean": 0.6527824845397845,
+      "kl_oracle": 0.5790147759689717,
+      "kl_cached": 0.7885491977212951,
+      "oracle_ratio": 0.8869949633792342,
+      "cached_ratio": 1.2079815503585807
+    },
+    "engineer__plan": {
+      "kl_host_clean": 2.6229205750860274,
+      "kl_oracle": 2.2932808049954474,
+      "kl_cached": 2.0397573756054044,
+      "oracle_ratio": 0.874323388507573,
+      "cached_ratio": 0.7776664665259655
+    },
+    "engineer__proposal": {
+      "kl_host_clean": 0.9356583226472139,
+      "kl_oracle": 0.6737503698095679,
+      "kl_cached": 0.7876931913197041,
+      "oracle_ratio": 0.7200816296950769,
+      "cached_ratio": 0.841859867276252
+    },
+    "counselor__arch": {
+      "kl_host_clean": 2.2968749655410647,
+      "kl_oracle": 1.3050356671446934,
+      "kl_cached": 1.8106054788222536,
+      "oracle_ratio": 0.5681788023830334,
+      "cached_ratio": 0.7882908325380861
+    },
+    "counselor__plan": {
+      "kl_host_clean": 5.527638848925449,
+      "kl_oracle": 3.798320707224093,
+      "kl_cached": 5.111724961472305,
+      "oracle_ratio": 0.6871506643315657,
+      "cached_ratio": 0.9247574056807283
+    },
+    "counselor__proposal": {
+      "kl_host_clean": 1.4251811285939766,
+      "kl_oracle": 1.1350288414105307,
+      "kl_cached": 1.2995138381811557,
+      "oracle_ratio": 0.796410237715049,
+      "cached_ratio": 0.9118236356828561
+    },
+    "founder__arch": {
+      "kl_host_clean": 6.227514982223511,
+      "kl_oracle": 5.030286777764559,
+      "kl_cached": 5.239556077867746,
+      "oracle_ratio": 0.8077518548126421,
+      "cached_ratio": 0.8413558366096427
+    },
+    "founder__plan": {
+      "kl_host_clean": 4.369963586330414,
+      "kl_oracle": 4.156433746218681,
+      "kl_cached": 3.8940963707864285,
+      "oracle_ratio": 0.9511369292001264,
+      "cached_ratio": 0.8911049929494755
+    },
+    "founder__proposal": {
+      "kl_host_clean": 2.909290441777557,
+      "kl_oracle": 2.2304898276925087,
+      "kl_cached": 2.3998282863758504,
+      "oracle_ratio": 0.7666782922951118,
+      "cached_ratio": 0.8248843951481074
+    },
+    "teacher__arch": {
+      "kl_host_clean": 33.75410906970501,
+      "kl_oracle": 23.813219144940376,
+      "kl_cached": 30.444410614669323,
+      "oracle_ratio": 0.7054909698775969,
+      "cached_ratio": 0.9019467985897395
+    },
+    "teacher__plan": {
+      "kl_host_clean": 18.56614267608984,
+      "kl_oracle": 8.994954483737274,
+      "kl_cached": 13.439313655525439,
+      "oracle_ratio": 0.48448159861021145,
+      "cached_ratio": 0.7238613798240967
+    },
+    "teacher__proposal": {
+      "kl_host_clean": 20.628746764734387,
+      "kl_oracle": 8.705037025269121,
+      "kl_cached": 16.53288529079873,
+      "oracle_ratio": 0.4219857427379305,
+      "cached_ratio": 0.8014488460860995
+    },
+    "journalist__arch": {
+      "kl_host_clean": 6.961380150030891,
+      "kl_oracle": 4.730002716740273,
+      "kl_cached": 4.1727795295819305,
+      "oracle_ratio": 0.6794633556564619,
+      "cached_ratio": 0.5994184256067978
+    },
+    "journalist__plan": {
+      "kl_host_clean": 7.454970898350439,
+      "kl_oracle": 5.480130137746528,
+      "kl_cached": 4.155529118444974,
+      "oracle_ratio": 0.7350974554386411,
+      "cached_ratio": 0.557417215319307
+    },
+    "journalist__proposal": {
+      "kl_host_clean": 14.683590091764927,
+      "kl_oracle": 13.230693466961384,
+      "kl_cached": 12.787836030125618,
+      "oracle_ratio": 0.9010530384106555,
+      "cached_ratio": 0.8708930139160916
+    },
+    "doctor__arch": {
+      "kl_host_clean": 4.697529475183728,
+      "kl_oracle": 3.4567302340201422,
+      "kl_cached": 4.2803203136054435,
+      "oracle_ratio": 0.7358613186530232,
+      "cached_ratio": 0.9111854084615474
+    },
+    "doctor__plan": {
+      "kl_host_clean": 8.121153771877289,
+      "kl_oracle": 7.013393696397543,
+      "kl_cached": 7.9352744817733765,
+      "oracle_ratio": 0.863595727085503,
+      "cached_ratio": 0.9771117140094561
+    },
+    "doctor__proposal": {
+      "kl_host_clean": 3.1816129870712757,
+      "kl_oracle": 2.1532999109476805,
+      "kl_cached": 3.001501612365246,
+      "oracle_ratio": 0.6767950469456144,
+      "cached_ratio": 0.9433899171778825
+    },
+    "lawyer__arch": {
+      "kl_host_clean": 1.8116907847579569,
+      "kl_oracle": 1.39261893206276,
+      "kl_cached": 1.688250762410462,
+      "oracle_ratio": 0.7686846694695832,
+      "cached_ratio": 0.9318647401719898
+    },
+    "lawyer__plan": {
+      "kl_host_clean": 1.7600743082875852,
+      "kl_oracle": 1.5416732566081919,
+      "kl_cached": 1.6833612894115504,
+      "oracle_ratio": 0.8759137323628794,
+      "cached_ratio": 0.956414897646753
+    },
+    "lawyer__proposal": {
+      "kl_host_clean": 2.7734425475355238,
+      "kl_oracle": 2.755808213027194,
+      "kl_cached": 2.687739767599851,
+      "oracle_ratio": 0.9936417163124581,
+      "cached_ratio": 0.9690987722057455
+    },
+    "chef__arch": {
+      "kl_host_clean": 2.747275681234896,
+      "kl_oracle": 2.521816056687385,
+      "kl_cached": 2.578889078111388,
+      "oracle_ratio": 0.9179333817543321,
+      "cached_ratio": 0.9387077881285584
+    },
+    "chef__plan": {
+      "kl_host_clean": 2.12904467061162,
+      "kl_oracle": 1.9130345471203327,
+      "kl_cached": 1.8778753858059645,
+      "oracle_ratio": 0.8985412910903212,
+      "cached_ratio": 0.8820272358430596
+    },
+    "chef__proposal": {
+      "kl_host_clean": 0.5868235400412232,
+      "kl_oracle": 0.5289865469894721,
+      "kl_cached": 0.5469768118127831,
+      "oracle_ratio": 0.9014405709633119,
+      "cached_ratio": 0.9320975974725879
+    }
+  },
+  "qual": {
+    "long": "## Review of Microservice Architecture with Single PostgreSQL Database\n\nThis design presents a common microservice architecture pattern, but with a potential single point of failure (SPOF) in the shared PostgreSQL database. \n\n**Pros:**\n\n* **Scalability:** Microservices offer independent scaling, allowing individual services to handle increased load.\n* **Flexibility:**  Services can be developed and deployed independently, promoting agility",
+    "host": "This microservice architecture design has some potential benefits and drawbacks that need careful consideration. \n\n**Potential Benefits:**\n\n* **Scalability:**  Each service can be scaled independently based on its workload, potentially leading to improved performance and reduced costs.\n* **Flexibility:**  Microservices allow for independent development, deployment, and updates, fostering agility and faster innovation.\n* **Fault Tolerance:**  ",
+    "oracle": "This microservice architecture design has some potential benefits, but also some potential drawbacks that need careful consideration. \n\n**Pros:**\n\n* **Scalability:**  Each service can be scaled independently based on its workload, potentially leading to improved performance and reduced costs.\n* **Flexibility:**  Microservices allow for independent development, deployment, and maintenance, making it easier to adapt to changing requirements.\n",
+    "cached": "This microservice architecture design is a good starting point, but it needs some critical evaluation to ensure its effectiveness and scalability. \n\n**Strengths:**\n\n* **Simplicity:**  Using a single database for both transactional state and event logs is straightforward and minimizes complexity.\n* **Centralized Data:**  Sharing a single database provides a centralized location for data, making it easier to manage and maintain.\n"
+  }
+}
