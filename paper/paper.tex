@@ -29,47 +29,27 @@
 \maketitle
 
 \begin{abstract}
-Role prompts of the form \emph{``As X, do Y''} are widely used, but the online computation that combines persona information $X$ and task information $Y$ is not well characterized. We study this question with a residual-stream $2\times2$ decomposition. For each persona-task pair, we compare baseline-baseline, persona-only, task-only, and persona-plus-task prompts, and define a pure persona effect $\Delta_X$, a pure task effect $\Delta_Y$, and an interaction term $\mathrm{Inter} = \Delta_{XY} - \Delta_X - \Delta_Y$. The central claim of the paper is that persona-task composition is approximately additive in a localized residual-stream region near answer formation, with explicit limits on what that local additivity does and does not imply.
+Role prompts of the form \emph{``As X, do Y''} combine a persona specification $X$ with a task specification $Y$ at inference time. We characterize where, in the residual stream of an instruction-tuned language model, this combination is causally simple enough to be approximated additively. For each persona-task pair we compare four prompts -- baseline, persona-only, task-only, and persona-plus-task -- and form a pure persona effect $\Delta_X$, a pure task effect $\Delta_Y$, and an interaction term $\mathrm{Inter} = \Delta_{XY} - \Delta_X - \Delta_Y$.
 
-The additive regime is \emph{localized but not point-like}: it spans the last prompt position $p_{\text{last}}$ and the first generated-token positions $g_1$ and $g_2$. On Gemma-2-2B-IT, additive substitution remains low-KL at all three positions in an early/mid-depth layer band, with median KL at $g_1$ of $0.049$ at layer 14 and at $g_2$ of $0.060$ at layer 14 on a 4-persona $\times$ 3-task grid. The same qualitative position-localized pattern recurs on Qwen-2.5-1.5B-Instruct and Qwen-2.5-3B-Instruct. Broadening prompt coverage to 8 long-form personas and 6 tasks (48 cells) leaves the localized additive regime intact: on Gemma-2-2B-IT median KL is $0.229$ at $p_{\text{last}}$, $0.056$ at $g_1$, and $0.056$ at $g_2$ at layer 14; on Qwen-2.5-1.5B-Instruct, the corresponding early-layer medians are $0.030$, $0.018$, and $0.014$.
+Near answer formation -- the last prompt position together with the first two generated tokens -- $\Delta_{XY}$ is well approximated by $\Delta_X + \Delta_Y$, and substituting the additive prediction for the clean residual yields downstream output within a small KL of clean at an early/mid layer band. The pattern holds on Gemma-2-2B-IT and on Qwen-2.5-{1.5B, 3B}-Instruct, on a 12-cell short grid and on a 48-cell long-persona grid. A behavioral check -- scoring persona-specific markers in the 80-token continuation -- confirms that this local distributional fidelity carries persona-conditioned output content.
 
-Distributional similarity is not the same as behavioral correctness, so we complement the KL evidence with a behavioral-marker test: across 8 long personas $\times$ 3 review tasks, we score whether persona-specific markers (e.g., ``SPOF'' for the engineer persona, ``differential'' for the doctor persona) appear in the 80-token greedy continuation. Additive substitution at $p_{\text{last}}$, layer~14 recovers persona markers in 14 of 24 cells (58.3\%), close to the clean ceiling of 16 of 24 (66.7\%) and far above the bare-prompt floor of 1 of 24 (4.2\%) where the persona text is removed from the prompt.
-
-We also retain an important negative result. Even when local additive substitution predicts next-step behavior well, substituting residuals into a baseline host prompt does not replace the information carried by persona text in context: on an 8-persona $\times$ 3-task long-persona setting, host-to-target median KL is $3.05$, cached single-site substitution reduces it only to $2.84$, and wider multi-layer substitution does not materially improve it. The clean conclusion is therefore not that role prompts are ``just vectors,'' but that persona-task composition is approximately additive in a localized residual-stream region near answer formation, while full prompt functionality remains distributed across the prompt and KV cache.
+The same experiments mark a boundary. Substituting the cached additive prediction into a baseline host prompt without the persona text recovers only a small fraction of the host-to-target KL gap, and multi-layer or oracle substitution do not change this materially. The persona's contribution to multi-token generation is distributed across the prompt and KV cache; the local additive regime accounts for the next-step composition, not the full mechanism.
 \end{abstract}
 
 \section{Introduction}
 
-Prompts of the form \emph{``As Warren Buffett, give advice''} or \emph{``As a senior software engineer, review this design''} are now routine. They are also mechanistically ambiguous. A model must combine persona information $X$ with task information $Y$ and produce behavior that reflects both. The central question of this paper is:
+Prompts of the form \emph{``As Warren Buffett, give advice''} or \emph{``As a senior software engineer, review this design''} are routine, and instruction-tuned models handle them robustly. The online computation that combines a persona specification $X$ with a task specification $Y$ in the residual stream is less well understood. This paper asks where, along the layer and position axes, that combination is causally simple enough to be approximated additively.
 
-\begin{quote}
-\textbf{How does an instruction-tuned language model combine persona information and task information in the residual stream near answer formation?}
-\end{quote}
-
-The most direct way to study this question is to avoid assuming in advance that the right object is a neuron, a head, or a circuit fragment. Instead, we start with the residual stream and ask whether persona and task contributions can be decomposed, and if so, where that decomposition is causally useful.
-
-The residual-stream $2\times2$ decomposition gives a natural way to pose that question. For each persona-task pair, compare four prompts: baseline-baseline ($BB$), persona-only ($XB$), task-only ($BY$), and persona-plus-task ($XY$). At a fixed layer and position, define
+For each persona-task pair we compare four prompts -- baseline-baseline ($BB$), persona-only ($XB$), task-only ($BY$), and persona-plus-task ($XY$) -- and at each layer and position form
 \begin{align}
-\Delta_X &= h_{XB} - h_{BB}, \\
+\Delta_X &= h_{XB} - h_{BB}, &
 \Delta_Y &= h_{BY} - h_{BB}, \\
-\Delta_{XY} &= h_{XY} - h_{BB}, \\
+\Delta_{XY} &= h_{XY} - h_{BB}, &
 \mathrm{Inter} &= \Delta_{XY} - \Delta_X - \Delta_Y.
 \end{align}
-The empirical question becomes concrete: is $\Delta_{XY}$ directionally aligned with $\Delta_X + \Delta_Y$? Are $\Delta_X$ and $\Delta_Y$ separated enough to be meaningful components? When we substitute $h_{BB} + \Delta_X + \Delta_Y$ for the clean $XY$ residual, does downstream behavior stay close to clean?
+The empirical questions follow directly: is $\Delta_{XY}$ aligned with $\Delta_X + \Delta_Y$? Are $\Delta_X$ and $\Delta_Y$ separated? When we substitute $h_{BB} + \Delta_X + \Delta_Y$ for the clean $XY$ residual, does downstream output stay close to clean? The answers turn out to depend sharply on layer and position. They are affirmative near answer formation -- the last prompt position $p_{\text{last}}$ and the first two generated tokens $g_1, g_2$, in an early/mid layer band -- and they degrade outside that region. The pattern holds across Gemma-2 and Qwen-2.5 instruction-tuned models and across a 48-cell grid of long-form personas and diverse tasks.
 
-We do \emph{not} attempt a full-sequence mechanism. Instead, we ask whether the additive regime is localized to a small region near answer formation, whether that regime survives broader prompt coverage, and what explicit boundary conditions limit its interpretation.
-
-The answer is a scoped positive. We find a localized additive regime spanning $p_{\text{last}}$ and the first two generated-token positions $g_1$ and $g_2$, strongest in early/mid layers and degrading later. We then show that the same qualitative pattern survives a much broader grid of long-form personas and diverse tasks, and recurs across Gemma and Qwen families. Finally, we show that this local additive structure does \emph{not} license a stronger claim that a persona prompt can be replaced by a single residual vector: host-prompt injection remains substantially short of the clean long-persona target. The resulting paper is deliberately narrower than a full mechanistic anatomy, but stronger for that reason.
-
-\paragraph{Contributions.}
-This paper makes five claims:
-\begin{enumerate}
-    \item A residual-stream $2\times2$ decomposition is a useful mechanistic abstraction for role prompts.
-    \item The additive approximation is causally strong in a \emph{localized region} near answer formation, spanning $p_{\text{last}}$, $g_1$, and $g_2$.
-    \item This localized regime is robust across a broader grid of long-form personas and tasks, and recurs across model families.
-    \item A behavioral-marker test, complementary to the distributional KL metric, confirms that the additive substitution preserves persona-conditioned output content at a rate comparable to the clean condition.
-    \item The same experiments identify a clear limit: local residual sufficiency does not imply full prompt replacement, pointing to distributed prompt/KV mechanisms outside the local additive story.
-\end{enumerate}
+The same intervention machinery exposes a sharp limit. Substituting the cached additive prediction at $p_{\text{last}}$ into a baseline host prompt -- with the persona text removed -- does not approach the clean long-persona target, and clamping the substitution at multiple layers does not help. The persona's role in multi-token generation is distributed across the prompt and KV cache; the local additive regime captures the next-step composition, not the full mechanism.
 
 \section{Related Work}
 
@@ -130,14 +110,7 @@ We report three families of statistics:
 
 \subsection{Positions}
 
-The key methodological extension in this paper is to move beyond $p_{\text{last}}$ only. We probe a small local band:
-\begin{itemize}
-    \item $p_{\text{last}}$: the last prompt token before generation,
-    \item $g_1$: the first generated-token position,
-    \item $g_2$: the second generated-token position.
-\end{itemize}
-
-For $g_1$ and $g_2$, we teacher-force on the clean $XY$ continuation so that comparisons remain position-aligned rather than drifting under free generation. This preserves a clean causal comparison while extending the analysis beyond prompt-only positions.
+We probe three positions: $p_{\text{last}}$ (the last prompt token), $g_1$ (the first generated token), and $g_2$ (the second generated token). At $g_1$ and $g_2$ we teacher-force on the clean $XY$ continuation, so comparisons across conditions remain position-aligned.
 
 \subsection{Causal metric}
 
@@ -150,45 +123,11 @@ for the clean $XY$ hidden state and measure the downstream effect by 10-token te
 \section{Localized Additive Composition Near Answer Formation}
 \label{sec:localized}
 
-\subsection{Results on the short grid}
+We measure the $2\times2$ decomposition at three probe positions -- $p_{\text{last}}$, $g_1$, $g_2$ -- on the 12-cell short grid. \Cref{tab:localized-short,fig:localized} summarize the result.
 
-On Gemma-2-2B-IT, three facts hold at $p_{\text{last}}$:
-\begin{enumerate}
-    \item $\Delta_{XY}$ is directionally aligned with $\Delta_X + \Delta_Y$ throughout the network.
-    \item $\Delta_X$ and $\Delta_Y$ are partially separable.
-    \item Additive substitution is causally sufficient over a substantial layer range.
-\end{enumerate}
+The pattern is the same across positions and models: a low-KL early/mid layer band, smoothly degrading later. On Gemma-2-2B-IT at $p_{\text{last}}$, median causal KL is $0.0004$ at layer 6, $0.033$ at layer 10, $0.371$ at layer 14, $1.371$ at layer 18. At $g_1$ the corresponding numbers are $0.002$, $0.005$, $0.049$; at $g_2$, $0.001$, $0.013$, $0.060$. The cross-model picture matches: at the best early layer, Qwen-2.5-1.5B has medians $0.030 / 0.018 / 0.014$ at $p_{\text{last}}/g_1/g_2$, and Qwen-2.5-3B has $0.031 / 0.021 / 0.021$. The first generated tokens stay low-KL further into the network than $p_{\text{last}}$ does, which is consistent with the additive composition being most legible exactly at the prompt-to-answer transition.
 
-On the 12-cell short grid, additive substitution at $p_{\text{last}}$ has median KL $0.000$ at layer 6, $0.033$ at layer 10, $0.371$ at layer 14, and $1.371$ at layer 18 on Gemma-2-2B-IT.
-
-\subsection{Position-localized result}
-
-We measure the same decomposition and causal substitution at $p_{\text{last}}$, $g_1$, and $g_2$ on the 4-persona $\times$ 3-task grid. The main result is that the additive regime is localized, but not point-like.
-
-\paragraph{Gemma-2-2B-IT.}
-At the three probe positions, the early/mid-layer regime remains low-KL:
-\begin{itemize}
-    \item $p_{\text{last}}$: median KL $0.0004$ at layer 6, $0.033$ at layer 10, $0.371$ at layer 14
-    \item $g_1$: median KL $0.002$ at layer 6, $0.005$ at layer 10, $0.049$ at layer 14
-    \item $g_2$: median KL $0.001$ at layer 6, $0.013$ at layer 10, $0.060$ at layer 14
-\end{itemize}
-The later layers degrade, especially at $p_{\text{last}}$, but the additive approximation is clearly not confined to a single site.
-
-The geometry is consistent with the causal result. At representative layers, $\cos(\Delta_{XY}, \Delta_X + \Delta_Y)$ remains high across the localized band. For example, on Gemma-2-2B-IT:
-\begin{itemize}
-    \item at $p_{\text{last}}$, layer 14: median cosine $0.874$
-    \item at $g_1$, layer 14: median cosine $0.935$
-    \item at $g_2$, layer 14: median cosine $0.898$
-\end{itemize}
-Meanwhile $\cos(\Delta_X,\Delta_Y)$ stays substantially lower, indicating partial separability of persona and task effects even when the interaction term is not small in norm.
-
-\paragraph{Qwen cross-model confirmation.}
-The same qualitative pattern recurs on Qwen:
-\begin{itemize}
-    \item Qwen-1.5B at early layer 7: median KL $0.030$ at $p_{\text{last}}$, $0.018$ at $g_1$, $0.014$ at $g_2$
-    \item Qwen-3B at early layer 9: median KL $0.031$ at $p_{\text{last}}$, $0.021$ at $g_1$, $0.021$ at $g_2$
-\end{itemize}
-Later layers degrade in both Qwen models, just as in Gemma. This is important for scope: the claim is not that additivity holds uniformly everywhere, but that there is a reproducible localized regime near answer formation.
+The geometry tells the same story. At Gemma-2-2B-IT layer 14, median $\cos(\Delta_{XY}, \Delta_X+\Delta_Y)$ is $0.874$ at $p_{\text{last}}$, $0.935$ at $g_1$, and $0.898$ at $g_2$, while $\cos(\Delta_X,\Delta_Y)$ remains substantially lower. $\Delta_X$ and $\Delta_Y$ are partially separable; the interaction term is non-negligible in norm but does not rotate $\Delta_{XY}$ away from the additive sum.
 
 \begin{table}[t]
 \centering
@@ -221,46 +160,14 @@ Qwen-2.5-3B   & $g_2$             & L9: 0.021 [.011,.029] & L14: 0.026 [.023,.05
 \label{fig:localized}
 \end{figure}
 
-\subsection{Interpretation}
-
-The localized-position result changes the correct scope statement. The best-supported claim is no longer ``the additive approximation works at $p_{\text{last}}$,'' but:
-\begin{quote}
-\textbf{Persona-task composition is approximately additive in a localized residual-stream region near answer formation, spanning the last prompt position and the first generated-token positions.}
-\end{quote}
-This is materially stronger than a single-position claim, but still disciplined compared to a full-sequence mechanism.
+The additive approximation thus identifies a region, not a point: an early/mid layer band, at $p_{\text{last}}$ and the first two generated tokens. The boundaries of this region -- in particular how it varies with model scale and depth -- become the natural object for the rest of the paper.
 
 \section{Robustness to Persona and Task Diversity}
 \label{sec:diverse}
 
-A result that holds only for a few personas and three tasks may still be fragile. We therefore test the same localized method on a much broader prompt grid.
+The 12-cell grid is convenient but small. We rerun the same localized analysis on an 8-persona $\times$ 6-task grid (48 cells) that includes multi-sentence personas (engineer, counselor, founder, teacher, journalist, doctor, lawyer, chef) and a mix of review, planning, policy, creative, and recommendation tasks (\cref{app:grid}).
 
-\subsection{Long-persona grid}
-
-On the 8-persona $\times$ 6-task grid (48 cells), we keep the probe positions fixed at $p_{\text{last}}$, $g_1$, and $g_2$, and evaluate a small early/mid/late layer set.
-
-\paragraph{Gemma-2-2B-IT.}
-The localized additive regime survives on the larger grid:
-\begin{itemize}
-    \item $p_{\text{last}}$: median KL $0.072$ at layer 10, $0.229$ at layer 14, $0.518$ at layer 18
-    \item $g_1$: median KL $0.017$ at layer 10, $0.056$ at layer 14, $0.157$ at layer 18
-    \item $g_2$: median KL $0.012$ at layer 10, $0.056$ at layer 14, $0.138$ at layer 18
-\end{itemize}
-
-The directional geometry also remains favorable. On Gemma-2-2B-IT at layer 14:
-\begin{itemize}
-    \item at $p_{\text{last}}$: median $\cos(\Delta_{XY}, \Delta_X + \Delta_Y)=0.818$
-    \item at $g_1$: median $\cos(\Delta_{XY}, \Delta_X + \Delta_Y)=0.875$
-\end{itemize}
-At the same layers, median $\cos(\Delta_X,\Delta_Y)$ remains markedly smaller ($0.171$ at $p_{\text{last}}$, $0.234$ at $g_1$), so the additive story is not merely a trivial colinearity of all three vectors.
-
-\paragraph{Qwen-1.5B-Instruct.}
-The broader-grid result recurs cross-model:
-\begin{itemize}
-    \item $p_{\text{last}}$: median KL $0.030$ at layer 7, $0.112$ at layer 15, $0.198$ at layer 20
-    \item $g_1$: median KL $0.018$ at layer 7, $0.095$ at layer 15, $0.231$ at layer 20
-    \item $g_2$: median KL $0.014$ at layer 7, $0.097$ at layer 15, $0.279$ at layer 20
-\end{itemize}
-At Qwen layer 7, median $\cos(\Delta_{XY}, \Delta_X + \Delta_Y)$ is $0.862$ at $p_{\text{last}}$ and $0.936$ at $g_1$.
+The localized additive regime persists (\cref{tab:localized-diverse}; bottom row of \cref{fig:localized}). On Gemma-2-2B-IT, median causal KL at layer 14 is $0.229$ at $p_{\text{last}}$, $0.056$ at $g_1$, and $0.056$ at $g_2$; the corresponding cosines $\cos(\Delta_{XY}, \Delta_X + \Delta_Y)$ are $0.818$ and $0.875$ at $p_{\text{last}}$ and $g_1$, while $\cos(\Delta_X, \Delta_Y)$ stays substantially lower ($0.171$, $0.234$), ruling out trivial colinearity. On Qwen-2.5-1.5B at early layer 7, the medians are $0.030 / 0.018 / 0.014$, with cosines $0.862$ and $0.936$. Quantitatively the long-persona numbers are larger than the short-grid numbers -- multi-sentence personas push more into the residual -- but the qualitative shape is unchanged.
 
 \begin{table}[t]
 \centering
@@ -282,11 +189,8 @@ Qwen-2.5-1.5B & $g_2$             & L7: 0.014 [.008,.023] & L15: 0.097 [.044,.13
 \label{tab:localized-diverse}
 \end{table}
 
-\subsection{Is the robustness broad-based or carried by a few easy cells?}
-
-The larger-grid effect is not perfectly uniform, but it is broad-based enough for a paper claim. On Gemma-2-2B-IT at $p_{\text{last}}$, layer 14, per-persona median KLs range from roughly $0.14$--$0.39$ for most personas, with higher tails for a few outlier cells. On Qwen-1.5B-Instruct at $p_{\text{last}}$, layer 7, persona medians are tighter, mostly around $0.02$--$0.035$. Per-task medians on Gemma remain low-to-moderate across architecture review, planning, proposal review, policy commentary, haiku, and recommendation, rather than collapsing onto a single easy task family.
-
-This is enough to support a careful robustness statement: the localized additive regime is not being carried by only one or two personas or tasks, though some tails remain and the result is not perfectly uniform at the cell level.
+\paragraph{Per-cell breakdown.}
+The effect is not uniform across cells, but it is not driven by a few easy ones either. Per-persona median KLs on Gemma-2-2B-IT at $p_{\text{last}}$, layer 14 range from $0.14$ to $0.39$ for most personas, with a few outlier cells in the tail; on Qwen-1.5B-Instruct at layer 7 the persona medians are tighter, mostly $0.02$--$0.035$. Per-task medians on Gemma remain low to moderate across all six task families rather than concentrating on one.
 
 \section{Behavioral Verification of the Additive Substitution}
 \label{sec:behavioral}
@@ -309,8 +213,6 @@ A cell scores \emph{any-marker} if at least one persona marker appears in the 80
 
 \subsection{Results}
 
-\Cref{tab:markers} reports any-marker presence and average distinct-marker count under each condition.
-
 \begin{table}[t]
 \centering
 \small
@@ -328,41 +230,16 @@ Bare prompt (no persona text)        & \phantom{0}1 / 24 (\phantom{0}4.2\%)  & 0
 \label{tab:markers}
 \end{table}
 
-Two findings stand out. First, the bare condition collapses to 4.2\% any-marker presence (1 of 24 cells), versus 66.7\% for clean. This is the strongest behavioral check we have that the persona text is doing real work in producing persona-conditioned output, and that the test detects when persona-specific content is absent. Second, the additive condition (58.3\%) tracks the clean ceiling (66.7\%) closely --- within roughly 13\% of clean and about 14$\times$ above the bare floor --- confirming that single-site additive substitution at $p_{\text{last}}$, $L=14$ does not degrade persona-conditioned output content. The distinct-marker column shows the same pattern in finer-grained form: clean at 1.21, additive at 0.92, bare at 0.08.
+The bare condition collapses to 4.2\%, confirming that the persona text is the primary source of persona-conditioned content in this protocol. The additive condition tracks the clean ceiling closely (58.3\% vs.\ 66.7\%; 0.92 vs.\ 1.21 distinct markers), so substituting $h_{BB} + \Delta_X + \Delta_Y$ at $p_{\text{last}}$, $L=14$ does not damage the persona-conditioned output.
 
-\subsection{Interpretation}
+Remove-X is the informative third row. Subtracting $\Delta_X$ at one site barely changes marker presence (62.5\%). This is consistent with the negative result in \cref{sec:no-replacement}: during multi-token generation, persona content arrives via attention back to the persona-text positions, not through a single residual at $p_{\text{last}}$. A one-site subtraction cannot reach those positions. Only removing the persona text from the prompt itself -- the bare condition -- collapses persona-marker recovery.
 
-The clean--additive gap is small, and the clean--bare gap is large. That is the predicted shape for an additive substitution that preserves persona-conditioned behavior. The third row deserves separate comment: the remove-X intervention at $p_{\text{last}}$, $L=14$ (subtracting $\Delta_X$) does not substantially reduce marker presence (62.5\% vs.\ 66.7\% clean). This is consistent with the negative result in \cref{sec:no-replacement}: persona-conditioned content during multi-token generation flows in large part through attention back to the persona-text positions in the prompt, not through a single residual at $p_{\text{last}}$. Subtracting $\Delta_X$ at one site is too narrow to suppress persona behavior across the full 80-token continuation; only \emph{removing the persona text from the prompt entirely}, as in the bare condition, collapses persona-marker recovery.
-
-The behavioral test therefore confirms two things in tandem: (i) the additive substitution preserves persona-conditioned output where the local additive picture is valid, and (ii) the persona contribution to multi-token generation is genuinely distributed, with single-site interventions insufficient to remove it. Both align with the picture developed in \cref{sec:no-replacement}: local additive structure is real and useful for predicting the next-step composition, but the wider mechanism producing persona-conditioned generation extends beyond the local additive region.
-
-\section{What the Local Additive Story Does Not License}
+\section{Where the Local Additive Story Stops}
 \label{sec:no-replacement}
 
-The most natural over-reading of the preceding sections is that a persona prompt can now be replaced by a vector. Our experiments do not support that claim.
+A natural next question is whether the persona prompt can be replaced by the cached residual vector itself. It cannot. We construct, for each long-persona cell, a host prompt with the persona text removed (\emph{``As a thoughtful person, [task]''}) and compare 10-token KL against the clean long-persona continuation under three interventions at $p_{\text{last}}$: no substitution, oracle substitution with the clean $h_{XY}$, and cached substitution with $h_{BB} + \Delta_X + \Delta_Y$. Across 24 cells, host-baseline median KL is $3.05$, cached substitution reaches $2.84$, oracle substitution reaches $2.64$. Both close only a small fraction of the gap.
 
-\subsection{Host-prompt injection fails to replace persona text}
-
-We tested a use-case-relevant setting based on long-form personas. The target prompt is a clean long-persona prompt; the host prompt is the corresponding baseline-persona prompt for the same task. We then substitute either:
-\begin{itemize}
-    \item the oracle clean residual $h_{XY}$ at $p_{\text{last}}$, or
-    \item the cached additive prediction $h_{BB} + \Delta_X + \Delta_Y$ at $p_{\text{last}}$,
-\end{itemize}
-and compare 10-token KL against the clean long-persona continuation. For this experiment we use the 8-persona $\times$ 3 review-task subset of the long-persona grid (24 cells), matching the protocol of the original cache-and-inject experiments and keeping prompt structure consistent across cells.
-
-Across these 24 long-persona cells, the host baseline median KL is $3.05$. Cached single-site substitution reduces this only slightly, to median KL $2.84$. Oracle substitution helps somewhat more (median KL $2.64$), but still falls well short of the clean target. This is the wrong outcome for a ``prompts are just vectors'' thesis.
-
-\subsection{Wider multi-layer substitution does not fix the problem}
-
-We also tried clamping the additive prediction at multiple layers simultaneously. On the same 24-cell setting:
-\begin{itemize}
-    \item single-layer substitution at layer 14: median KL $2.84$
-    \item layers $\{10,12,14\}$: median KL $2.81$
-    \item layers $\{10,12,14,16,18\}$: median KL $2.82$
-    \item layers $\{10,12,14,16,18,20,22\}$: median KL $3.04$
-    \item layers $\{6,8,10,12,14,16,18,20,22\}$: median KL $3.01$
-\end{itemize}
-The host baseline itself is $3.05$. Multi-layer clamping therefore does not materially close the host-to-target gap, and larger substitution windows begin to hurt.
+Multi-layer substitution does not help. Clamping the additive prediction at successively wider layer sets gives medians $2.81$, $2.82$, $3.04$, $3.01$ for layer sets $\{10,12,14\}$, $\{10,12,14,16,18\}$, $\{10,12,14,16,18,20,22\}$, $\{6,8,10,12,14,16,18,20,22\}$. Wider windows eventually hurt, because clamping over many layers prevents the natural forward propagation that would otherwise carry persona content through downstream computation.
 
 \begin{table}[t]
 \centering
@@ -384,55 +261,36 @@ Cached substitution at $\{6,8,10,12,14,16,18,20,22\}$ & 3.01 \\
 \label{tab:host-inject}
 \end{table}
 
-\subsection{Interpretation}
-
-This negative result is conceptually useful. The local additive story predicts next-step behavior in-context, but it does not replace the distributed information carried by persona text across prompt positions and the KV cache. During generation, later tokens continue to attend to the original prompt tokens. A single-site residual substitution can influence the next decision strongly without reproducing the full content of the original prompt state.
-
-This gives a clean paper boundary:
-\begin{quote}
-\textbf{Local residual additivity near answer formation is real and useful, but it is not equivalent to full prompt compression or prompt replacement.}
-\end{quote}
+The picture is two-level. The local additive regime characterizes the next-step composition: at $p_{\text{last}}$ and the first two generated tokens, in an early/mid layer band, $\Delta_X + \Delta_Y$ is causally sufficient. Multi-token persona-conditioned generation depends on attention back to the persona-text positions across the prompt, which a single residual cannot reproduce regardless of how many layers it is clamped over.
 
 \section{Discussion}
 
-The main strength of the current paper is not that it solves role prompting completely, but that it clarifies the right scale of claim.
+The natural mechanistic object for online role prompting is not a single hidden state but a small region: $p_{\text{last}}$ together with the first few generated tokens, in an early/mid layer band. Within this region, $\Delta_X$ and $\Delta_Y$ are reasonable summaries of the persona and task contributions, and their sum is a useful predictor of the composite residual. The structure survives both a 48-cell long-persona grid and cross-model checks on Gemma and Qwen, which gives the localization some claim to generality.
 
-The central result is strong precisely because it is scoped. The paper does not claim a full mechanism of role prompting. It claims that a localized additive regime exists near answer formation, that this regime survives broader prompt diversity, and that it has a sharp limit in the prompt-replacement setting.
+Outside the region the story degrades, and the host-injection experiment in \cref{sec:no-replacement} sets the outer boundary. Persona-conditioned generation reaches the output through attention to persona-text positions throughout the prompt, and a residual at one site cannot stand in for that. The picture is two-level: local additive composition at the prompt-to-answer transition, and a wider distributed prompt/KV mechanism that local substitution does not displace.
 
-First, the additive regime is localized but not isolated. It spans $p_{\text{last}}$, $g_1$, and $g_2$, which is exactly the region where a model is turning a prompt representation into the first few answer tokens. That is a more natural mechanistic object than a single hidden state at one prompt position.
+Relative to function-vector \cite{todd2024function} and task-vector \cite{hendel2023icltask} work, $\Delta_X$ and $\Delta_Y$ are residual-stream analogs of the same construction; the contribution here is compositional rather than single-axis. Relative to activation-addition steering \cite{turner2023actadd,zou2023representation} the aim is characterization, not control. Relative to ROME-style editing \cite{meng2022rome}, the analysis sits at a higher level of abstraction -- residual composition rather than weight-space facts -- and does not claim circuit-level closure.
 
-Second, the result survives a broader and more realistic prompt grid. The use of long-form personas matters because modern role prompts are often descriptions rather than named entities. The use of six task families matters because recommendation, policy, review, planning, and constrained creative tasks pull on different output structures. The fact that the localized regime survives this broader grid makes the central claim much more credible.
+\paragraph{On the interaction term.}
+The interaction can be large in raw residual norm even where additive substitution remains causally strong. One candidate explanation is that the residual consumed by the next layer is post-normalization, and the next-layer RMSNorm absorbs part of the apparent magnitude gap between $h_{BB} + \Delta_X + \Delta_Y$ and $h_{XY}$ before downstream computation sees it. We do not directly intervene on the normalization path here, so we report this only as a candidate. The empirical observation, which does not depend on it, is that raw non-additivity in norm does not predict downstream causal fidelity under substitution.
 
-Third, the negative host-injection result improves the paper rather than weakening it. It prevents a common over-interpretation and shows that the correct mechanistic picture has at least two levels: a localized additive regime near answer formation, and a wider distributed prompt/KV mechanism that local substitution does not erase.
-
-Relative to prior work on activation steering and representation engineering \cite{turner2023actadd,zou2023representation}, the contribution here is not a new steering method, but a causal characterization of what kind of residual composition structure role prompts induce. Relative to ROME-style work \cite{meng2022rome}, we are not editing weights or claiming circuit-level closure. The paper sits at an intermediate level: higher than neuron ontology, lower than a full theory of prompt-conditioned computation.
-
-\paragraph{Why the interaction term is not fatal to the additive story.}
-The interaction term can be large in raw residual norm even when additive substitution remains causally strong. A useful framing is that the residual stream consumed by the next layer is post-normalization, not raw: a portion of the apparent magnitude gap between $h_{BB} + \Delta_X + \Delta_Y$ and $h_{XY}$ is absorbed by the next layer's RMSNorm before downstream computation sees it. We do not directly intervene on the normalization path here and so we report this only as a candidate explanation, not a mechanism. The operative observation for this paper is the empirical one: raw non-additivity in hidden-state norm does not by itself determine whether additive recomposition is behaviorally useful. The quantity that matters is downstream causal fidelity under substitution, and that fidelity is high in a localized region even when the interaction is not small in norm.
-
-\paragraph{Why $(p_{\text{last}}, g_1, g_2)$ rather than a larger window.}
-The probe positions are chosen to span the transition from prompt representation to the first answer tokens, which is the smallest object that captures \emph{both} the static prompt encoding and the model's online use of that encoding. Earlier positions inside the user turn can also show low-KL additive substitution, but their geometric statistics are less stable and their interpretation is less clean because they precede the model's prompt-to-answer transition. Later generated positions, beyond $g_2$, drift increasingly under teacher forcing and are not the natural mechanistic object for an online composition question.
+\paragraph{On position choice.}
+The region $(p_{\text{last}}, g_1, g_2)$ spans the transition from prompt representation to the first answer tokens. Earlier positions inside the user turn can also show low-KL additive substitution, but with less stable geometry. Later generated positions drift increasingly under teacher forcing.
 
 \section{Limitations}
 
 \begin{enumerate}
-    \item \textbf{Localized, not full-sequence.} We study a small region near answer formation, not every prompt position or every generated token.
-    \item \textbf{No circuit-level sufficiency.} The paper does not identify a minimal set of heads, neurons, or weights whose editing installs or removes a persona feature.
-    \item \textbf{Prompt diversity is broader, not exhaustive.} The long-persona grid is much stronger than the short grid, but it is still English-only, cooperative, and single-turn.
-    \item \textbf{Boundary cases remain.} Some late-layer and particular-cell tails are large. We have not systematically characterized which $(X,Y)$ combinations push the interaction term beyond the regime where additive substitution remains causally faithful.
-    \item \textbf{Negative result is still local.} The failed prompt-replacement experiment shows that single-site substitution is insufficient, but it does not yet identify the correct distributed intervention.
-    \item \textbf{Cross-model breadth is still selective.} The localized position result was checked across multiple model families, but the 48-cell robustness grid was only run on Gemma-2-2B-IT and Qwen-2.5-1.5B-Instruct.
+    \item The analysis is restricted to a small region near answer formation. We do not study every prompt position or every generated token.
+    \item We do not identify a minimal set of heads, neurons, or weights whose editing installs or removes a persona feature.
+    \item The long-persona grid is broader than the short grid but remains English-only, cooperative, and single-turn.
+    \item Some late-layer and particular-cell tails are large. We do not characterize which $(X,Y)$ combinations push the interaction term beyond the regime where additive substitution remains causally faithful.
+    \item The host-injection experiment shows that single-site substitution cannot replace persona text, but does not identify the correct distributed intervention.
+    \item Cross-model evidence is limited to two families. The 12-cell short-grid localized result was checked on Gemma-2-2B-IT and Qwen-2.5-\{1.5B, 3B\}; the 48-cell long-persona grid was run on Gemma-2-2B-IT and Qwen-2.5-1.5B-Instruct only.
 \end{enumerate}
 
 \section{Conclusion}
 
-The cleanest statement supported by the current evidence is:
-
-\begin{quote}
-\textbf{In instruction-tuned language models, persona-task composition is approximately additive in a localized residual-stream region near answer formation, spanning the last prompt position and the first generated-token positions, but this local additive structure does not substitute for the distributed information carried by persona text in context.}
-\end{quote}
-
-This is narrower than a full mechanism of role prompting, but stronger than a single-position observation. It is supported by causal intervention, localized position extension, broader persona/task coverage, and cross-model recurrence. That is enough for a self-contained paper, and it leaves a clear next step for subsequent work: move from localized residual composition to distributed prompt/KV mechanisms.
+Persona-task composition in instruction-tuned language models admits a localized additive description in the residual stream near answer formation, holds across Gemma-2-2B-IT and Qwen-2.5-\{1.5B, 3B\}-Instruct on a 48-cell long-persona grid, and survives a behavioral test of persona-conditioned output content. The same intervention machinery shows where that description stops: a residual at one site cannot replace the persona text the model attends to throughout multi-token generation. The next natural step is to characterize that distributed mechanism directly.
 
 \paragraph{Reproducibility.}
 All experiments use HuggingFace \texttt{transformers} on a single Apple Silicon device with the \texttt{mps} backend. Gemma-2-2B-IT is loaded in \texttt{float32}; Qwen-2.5-1.5B-Instruct and Qwen-2.5-3B-Instruct are loaded in \texttt{bfloat16} (\texttt{float16} produces NaN residuals at the layers relevant here). Attention uses the \texttt{eager} implementation. All generation is greedy (\texttt{do\_sample=False}, \texttt{num\_beams=1}), so reported KLs and behavioral scores are deterministic functions of the model, prompt, and intervention. KL is computed by greedy 10-token continuation from the clean $XY$ prompt, followed by teacher-forced log-probability comparison across the same 10-token reference window under each intervention.
@@ -450,6 +308,7 @@ The main scripts supporting the paper are:
 \appendix
 
 \section{Prompt Grids}
+\label{app:grid}
 
 \subsection{Original short grid}
 
