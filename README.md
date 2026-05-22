@@ -108,9 +108,9 @@ This repository is released under the MIT License. See `LICENSE` for details.
 ## Citation
 
 ```bibtex
-@misc{as_x_do_y_2026,
+@misc{xu2026asxdoy,
   title         = {As X, Do Y: How Persona and Task Combine in Instruction-Tuned LLMs},
-  author        = {Anonymous},
+  author        = {Xu, Eric},
   year          = {2026},
   howpublished  = {arXiv preprint}
 }
