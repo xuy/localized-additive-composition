@@ -1,6 +1,6 @@
-# Localized Additive Composition of Persona and Task
+# As X, Do Y: How Persona and Task Combine in Instruction-Tuned LLMs
 
-This repository contains the paper and reproducibility artifacts for **"Localized Additive Composition of Persona and Task Near Answer Formation in Instruction-Tuned Language Models"**.
+This repository contains the paper and reproducibility artifacts.
 
 ## What the paper claims
 
@@ -108,8 +108,8 @@ This repository is released under the MIT License. See `LICENSE` for details.
 ## Citation
 
 ```bibtex
-@misc{localized_additive_composition_2026,
-  title         = {Localized Additive Composition of Persona and Task Near Answer Formation in Instruction-Tuned Language Models},
+@misc{as_x_do_y_2026,
+  title         = {As X, Do Y: How Persona and Task Combine in Instruction-Tuned LLMs},
   author        = {Anonymous},
   year          = {2026},
   howpublished  = {arXiv preprint}
