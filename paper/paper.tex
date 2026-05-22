@@ -22,7 +22,7 @@
 }
 
 \title{As X, Do Y: How Persona and Task Combine in Instruction-Tuned LLMs}
-\author{Anonymous Submission}
+\author{Eric Xu \\ Independent Researcher \\ \texttt{youxu@wustl.edu}}
 \date{}
 
 \begin{document}
@@ -293,7 +293,7 @@ The region $(p_{\text{last}}, g_1, g_2)$ spans the transition from prompt repres
 Persona-task composition in instruction-tuned language models admits a localized additive description in the residual stream near answer formation, holds across Gemma-2-2B-IT and Qwen-2.5-\{1.5B, 3B\}-Instruct on a 48-cell long-persona grid, and survives a behavioral test of persona-conditioned output content. The same intervention machinery shows where that description stops: a residual at one site cannot replace the persona text the model attends to throughout multi-token generation. The next natural step is to characterize that distributed mechanism directly.
 
 \paragraph{Reproducibility.}
-All experiments use HuggingFace \texttt{transformers} on a single Apple Silicon device with the \texttt{mps} backend. Gemma-2-2B-IT is loaded in \texttt{float32}; Qwen-2.5-1.5B-Instruct and Qwen-2.5-3B-Instruct are loaded in \texttt{bfloat16} (\texttt{float16} produces NaN residuals at the layers relevant here). Attention uses the \texttt{eager} implementation. All generation is greedy (\texttt{do\_sample=False}, \texttt{num\_beams=1}), so reported KLs and behavioral scores are deterministic functions of the model, prompt, and intervention. KL is computed by greedy 10-token continuation from the clean $XY$ prompt, followed by teacher-forced log-probability comparison across the same 10-token reference window under each intervention.
+Code, cached experiment outputs, and the paper source are available at \url{https://github.com/xuy/localized-additive-composition}. All experiments use HuggingFace \texttt{transformers} on a single Apple Silicon device with the \texttt{mps} backend. Gemma-2-2B-IT is loaded in \texttt{float32}; Qwen-2.5-1.5B-Instruct and Qwen-2.5-3B-Instruct are loaded in \texttt{bfloat16} (\texttt{float16} produces NaN residuals at the layers relevant here). Attention uses the \texttt{eager} implementation. All generation is greedy (\texttt{do\_sample=False}, \texttt{num\_beams=1}), so reported KLs and behavioral scores are deterministic functions of the model, prompt, and intervention. KL is computed by greedy 10-token continuation from the clean $XY$ prompt, followed by teacher-forced log-probability comparison across the same 10-token reference window under each intervention.
 
 \paragraph{Code and artifacts.}
 The main scripts supporting the paper are:
