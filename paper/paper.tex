@@ -38,18 +38,22 @@ Local additivity in the residual stream does not imply prompt compressibility. T
 
 \section{Introduction}
 
-Prompts of the form \emph{``As Warren Buffett, give advice''} or \emph{``As a senior software engineer, review this design''} are routine, and instruction-tuned models handle them robustly. The online computation that combines a persona specification $X$ with a task specification $Y$ in the residual stream is less well understood. This paper asks where, along the layer and position axes, that combination is causally simple enough to be approximated additively.
+Prompts of the form \emph{``As Warren Buffett, give advice''} or \emph{``As a senior software engineer, review this design''} are routine. Instruction-tuned models handle them well, producing output that fuses a persona's voice with a task's content. The mechanism that combines these two inputs in the residual stream is the question we study.
 
-For each persona-task pair we compare four prompts -- baseline-baseline ($BB$), persona-only ($XB$), task-only ($BY$), and persona-plus-task ($XY$) -- and at each layer and position form
+Two-factor effects have a canonical decomposition: each factor's pure contribution and an interaction term that captures non-additivity. The simplest hypothesis is that role prompts admit the same decomposition in the residual stream --- that the model's persona effect and task effect are separable directions and combine by addition. This is the natural extension to two factors of a line of work that has found linear contrastive-difference constructions surprisingly informative for single-axis effects: function vectors \cite{todd2024function}, in-context task vectors \cite{hendel2023icltask}, activation-addition steering \cite{turner2023actadd}, and task arithmetic on fine-tuned weights \cite{ilharco2023taskarith}. If two-factor additivity holds in some regime, the decomposition gives both clean attribution and a natural intervention site; if it does not, the deviation is the object to study.
+
+We test the hypothesis with a $2\times2$ contrast. For each persona-task pair we run four prompts -- baseline-baseline ($BB$), persona-only ($XB$), task-only ($BY$), and persona-plus-task ($XY$) -- and at each layer and position form
 \begin{align}
 \Delta_X &= h_{XB} - h_{BB}, &
 \Delta_Y &= h_{BY} - h_{BB}, \\
 \Delta_{XY} &= h_{XY} - h_{BB}, &
 \mathrm{Inter} &= \Delta_{XY} - \Delta_X - \Delta_Y.
 \end{align}
-The empirical questions follow directly: is $\Delta_{XY}$ aligned with $\Delta_X + \Delta_Y$? Are $\Delta_X$ and $\Delta_Y$ separated? When we substitute $h_{BB} + \Delta_X + \Delta_Y$ for the clean $XY$ residual, does downstream output stay close to clean? The answers turn out to depend sharply on layer and position. They are affirmative near answer formation -- the last prompt position $p_{\text{last}}$ and the first two generated tokens $g_1, g_2$, in an early/mid layer band -- and they degrade outside that region. The pattern holds across Gemma-2 and Qwen-2.5 instruction-tuned models and across a 48-cell grid of long-form personas and diverse tasks.
+$\mathrm{Inter}$ measures non-additivity directly. Whether the additive prediction is also causally sufficient is testable by substituting $h_{BB} + \Delta_X + \Delta_Y$ for the clean $XY$ residual and measuring downstream effects.
 
-The natural reading of an additive decomposition is that the role prompt can be replaced by its cached vector --- a single residual injected once should reproduce the long-persona behavior. The same intervention machinery shows that it cannot. Injecting the cached additive prediction at $p_{\text{last}}$ into a baseline host prompt with the persona text removed does not approach the clean long-persona target, and clamping the substitution at many layers, or substituting the oracle clean residual $h_{XY}$ itself, does not change this. Multi-token persona-conditioned generation flows through attention back to the persona-text positions throughout the prompt, which no residual at one site reproduces. Local additivity in the residual stream does not imply prompt compressibility.
+The answers depend sharply on layer and position. Additivity holds at the prompt-to-answer transition -- $p_{\text{last}}$ together with the first two generated tokens $g_1, g_2$, in an early/mid layer band -- on Gemma-2 and Qwen-2.5 instruction-tuned models, on a 12-cell short grid, and on a 48-cell grid of long-form personas and diverse tasks. Outside that region the decomposition degrades smoothly.
+
+The natural reading of an additive decomposition is that the role prompt can be replaced by its cached vector. The same intervention machinery shows it cannot. Injecting the cached additive prediction --- or the oracle clean residual $h_{XY}$ --- into a baseline host prompt with the persona text removed does not approach the clean long-persona target, at one site or at many layers. Multi-token persona-conditioned generation flows through attention back to the persona-text positions throughout the prompt, which no residual at one site reproduces. Local additivity in the residual stream does not imply prompt compressibility.
 
 \section{Related Work}
 
